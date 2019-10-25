@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        for (let i = 0; i < 3; i++) {
+            let i = 'abc'
+            console.log(i)
+                // 'abc' * 3
+        }
+
+
+        let a = 1 
+        {let a = 2}
+        console.log(a)
+            // 1
+
+        let b = 1 
+        {b = 2}
+        console.log(b)
+            // 2
+
+
+        // let tmp = 123;
+        // {
+        //   tmp = 'abc'; // ReferenceError
+        //   let tmp;
+        // }
+
+        // function bar(x = y, y = 2) {
+        //   return [x, y];
+        // }
+        // bar(); // 报错
+
+
+        let obj = Object.freeze({a: {}})
+        obj.a.b = 1
+        console.log(obj)
+            //{a:3}
+
+        let obj1 = Object.freeze({a: {}})
+        obj1.a.b = 1
+        console.log(obj1)
+            //{a:{b:1}}
+
+
+
+        let d = 1
+        console.log(window.d);
+        // undefined
+
+        var e = 1
+        console.log(window.e);
+        // 1
+
+
+
+
+
+
+        let obj3 = {p: ['Hello', {y: 'World'}]};
+        let {p: [x, {y}]} = obj3;
+        console.log(x);
+        // "Hello"
+        console.log(y);
+        // "World"
+
+
+        let abc
+            // {abc} = {abc: 1} // 报错
+        ({abc} = {abc: 1})
+        console.log(abc)
+            // 1
+
+
+        // const [a, b, c, d, e] = 'hello';
+        // a // "h"
+        // b // "e"
+        // c // "l"
+        // d // "l"
+        // e // "o"
+
+        let {length: len} = 'hello';
+        len // 5
+
+
+        let {
+            slice: s
+        } = '123';
+        console.log(s === String.prototype.slice); // true
+
+        let {
+            toString: ss
+        } = true;
+        ss === Boolean.prototype.toString // true
+
+        let {
+            toString: sss
+        } = 123;
+        sss === Boolean.prototype.toString // true
+
+
+        function add([x, y]) {
+            return x + y;
+        }
+        add([1, 2]); // 3
+
+
+        function move({
+            x = 0,
+            y = 0
+        } = {}) {
+            return console.log([x, y]);
+        }
+        move({
+            x: 3,
+            y: 8
+        }); // [3, 8]
+        move({
+            x: 3
+        }); // [3, 0]
+        move({}); // [0, 0]
+        move(); // [0, 0]
+
+
+        // var obj = { age: 20 }
+        // function fn(myobj) {
+        //     console.log(myobj.age)
+        // }
+        // fn(obj)
+        // // ================
+        // var obj = { age: 20 }
+        // function fn(myobj) {
+        //     const { age } = myobj
+        //     console.log(age)
+        // }
+        // fn(obj)
+        // // ================
+        // var obj = { age: 20 }
+        // function fn({ age }) {
+        //   console.log(age)
+        // }
+        // fn(obj)
+
+        // let g[g] = [3]
+        // console.log(g);
+
+
+        let person = {
+            name: 'zhangsan',
+            age: 20
+        };
+        let {
+            name,
+            age
+        } = person;
+        console.log(name, age); // 'zhangsan', 20
+        // --------------------------------------
+        let {
+            name: myName,
+            age: myAge
+        } = person;
+        // myName myAge 属于别名
+        console.log(myName); // 'zhangsan'
+        console.log(myAge); // 20
+
+
+        let str = 'abc'
+        console.log(str.charAt(0));
+
+
+
+        var str1 = 'Hello world!';
+        console.log(str1.startsWith('world', 6));
+        console.log(str1.endsWith('l', 4));
+        console.log(str1.includes('Hello', 6));
+
+
+        console.log('abc'.repeat(3));
+
+        console.log('09-17'.padStart(10, '2019-MM-DD'));
+        //2019-09-17
+
+
+        'x'.padStart(5, 'ab') // 'ababx'
+        'x'.padStart(4, 'ab') // 'abax'
+        'x'.padEnd(5, 'ab') // 'xabab'
+        'x'.padEnd(4, 'ab') // 'xaba'
+
+
+        '12'.padStart(10, '0') // "0000000012"
+
+        console.log(0b10) //2
+        console.log(0o10) //8
+
+
+
+
+        Number.isFinite(15); // true
+        Number.isFinite(0.8); // true
+        Number.isFinite(NaN); // false
+        Number.isFinite(Infinity); // false
+        Number.isFinite(-Infinity); // false
+        Number.isFinite('foo'); // false
+        Number.isFinite('15'); // false
+        Number.isFinite(true); // false
+
+        Number.isNaN(NaN) // true
+        Number.isNaN(9 / NaN) // true
+        Number.isNaN(15) // false
+        Number.isNaN('15') // false
+        Number.isNaN(true) // false
+
+
+        Number.parseInt === parseInt // true
+        Number.parseFloat === parseFloat // true
+
+
+
+        Number.isInteger(25) // true
+        Number.isInteger(25.0) // true
+        Number.isInteger(25.1) // false
+        Number.isInteger("15") // false
+        Number.isInteger(true) // false
+
+
+        console.log(Math.floor(-4.4));
+        console.log(Math.ceil(-4.4));
+        console.log(Math.round(-4.4));
+        console.log(Math.trunc(-4.4));
+
+        console.log(Math.floor(-4.6));
+        console.log(Math.ceil(-4.6));
+        console.log(Math.round(-4.6));
+        console.log(Math.trunc(-4.6));
+
+
+        2 ** 3 // 8
+
+        let j = 4;
+        j **= 3 // 64
+
+        Array.from({
+                length: 3
+            })
+            // [ undefined, undefined, undefined ]
+
+
+        let arrayLike = {
+            '0': 'a',
+            '1': 'b',
+            '2': 'c',
+            length: 3
+        }
+        let arr2 = Array.from(arrayLike); // ['a', 'b', 'c']
+
+
+        Array.from('hello')
+            // ['h', 'e', 'l', 'l', 'o']
+
+        Array.from(new Set(['a', 'b']))
+            // ['a', 'b']
+
+
+        Array.from(arrayLike, x => x * x);
+        // 等同于
+        Array.from(arrayLike).map(x => x * x);
+        Array.from([1, 2, 3], (x) => x * x)
+            // [1, 4, 9]
+
+
+        // [1, 2, 3, 4, 5].copyWithin(0, 3)
+        // // [4, 5, 3, 4, 5]
+        // [1, 2, 3, 4, 5].copyWithin(0, 3, 4)
+        // // [4, 2, 3, 4, 5]
+        // [1, 2, 3, 4, 5].copyWithin(0, -2, -1)
+        // // [4, 2, 3, 4, 5]
+
+
+        let ary = [{
+            id: 1,
+            name: '张三'
+        }, {
+            id: 2,
+            name: '李四'
+        }];
+        let target = ary.find((item, index, arr) => item.id == 2);
+        console.log(target); //{id: 2, name: "李四"}
+
+
+        let ary1 = [1, 5, 10, 15];
+        let index = ary1.findIndex((item, index, arr) => item > 9);
+        console.log(index); // 2
+
+
+        ['a', 'b', 'c'].fill(7)
+            // [7, 7, 7]
+        new Array(3).fill(7)
+            // [7, 7, 7]
+
+
+
+        for (let i of[1, 2, 3].entries()) {
+            console.log(i)
+                // [0,1]
+                // [1,2]
+                // [2,3]
+        }
+
+        for (let i of[1, 2, 3].keys()) {
+            console.log(i)
+                // 0
+                // 1
+                // 2
+        }
+
+        for (let i of[1, 2, 3].values()) {
+            console.log(i)
+                // 1
+                // 2
+                // 3
+        }
+
+        new Array(4).forEach((x, i) => console.log(x))
+
+        for (let i of new Array(3)) {
+            console.log(i)
+        }
+
+
+
+        function Point(x = 0, y = 0) {
+            this.x = x;
+            this.y = y;
+        }
+        var p = new Point();
+        p // { x: 0, y: 0 }
+
+
+        function lfp() {}
+
+        console.log(lfp.name);
+
+        let fn = function() {}
+        console.log(fn.name)
+            //'fn'
+
+        console.log(new Function().name)
+            //'anonymous'
+
+
+        let propKey = 'foo'
+        let obj123 = {
+            [propKey]: true,
+            ['a' + 'bc']: 123
+        }
+
+
+        console.log(Object.assign(2))
+
+
+        let objj = {}
+        let objj1 = {
+            a: 1
+        }
+        let objj2 = {
+            b: 2
+        }
+        Object.assign(objj, objj1, objj2)
+        console.log(objj) //{a:1,b:2}
+        objj1.a = 3
+        console.log(objj) //{a:1,b:2}
+
+
+        Object.getOwnPropertyDescriptors({
+                a: 1,
+                b: 2
+            })
+            // {
+            // a: 
+            // {value: 1, 
+            // writable: true, 
+            // enumerable: true, 
+            // configurable: true}, 
+            // b: 
+            // {value: 2, 
+            // writable: true, 
+            // enumerable: true, 
+            // configurable: true}
+            // }
+
+
+        let set1 = new Set([-0, 0])
+        console.log(set1);
+
+
+        let set = new Set(['red', 'green', 'blue']);
+        for (let item of set.keys()) {
+            console.log(item);
+        }
+        // red
+        // green
+        // blue
+        for (let item of set.values()) {
+            console.log(item);
+        }
+        // red
+        // green
+        // blue
+        for (let item of set.entries()) {
+            console.log(item);
+        }
+        // ["red", "red"]
+        // ["green", "green"]
+        // ["blue", "blue"]
+
+// var map = new Map();
+// var k1 = ['a'];
+// var k2 = ['a'];
+// map.set(k1, 111).set(k2, 222);
+// map.get(k1) // 111
+// map.get(k2) // 222
+
+
+
+
+    </script>
+</body>
+
+</html>

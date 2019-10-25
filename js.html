@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let arr = [1,2]
+    arr['a'] = 3
+    console.log(arr)  // [1,2, a: 3]
+    console.log(arr.length) // 2
+    console.log(Array.isArray(arr)) // true
+
+
+    // 过去三十天组成的数组
+    let month = new Array(30).fill(undefined)
+    console.log(month)
+
+    let lastMonth = month.map((item, index) => {
+      let day = new Date(+new Date() - index*24*60*60*1000)
+      return day.getMonth() + 1 + '-' + day.getDate()
+    }).reverse()
+    console.log(lastMonth)
+
+
+    function Foo() {
+      var i = 0;
+      return function() {
+        console.log(i++)
+      }
+    }
+
+    Foo()()
+
+    var j = 0
+    console.log(j++)
+  </script>
+</body>
+</html>

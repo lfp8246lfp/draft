@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        /* .ad1 {
+            height: 100px;
+            width: 200px;
+            background-color: #1453ad;
+        }
+        
+        .ad2 {
+            height: 100px;
+            width: 200px;
+            background-color: #ad1453;
+        }
+        
+        i {
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin: 100px auto;
+            transform: rotate(30deg) scale(2);
+            box-shadow: 10px 10px 10px #000;
+        } */
+
+
+        /* 好乱。。。 */
+        .father {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            padding: 20px;
+            margin: 100px;
+            background-color: #0ff;
+            border: 10px solid #ff0;
+        }
+        .son1 {
+            position: absolute;
+            /* left:50%; */
+            /* top:50%; */
+            width: 70px;
+            height: 50px;
+            /* margin-left:-50%; */
+            /* margin-top:-50%; */
+            background-color: #f0f;
+        }
+        .son2 {
+            position: absolute;
+            position: relative;
+            left:50%;
+            top:50%;
+            width: 50%;
+            height: 50%;
+            background-color: #000;
+        }
+        
+    </style>
+    <script src="./jquery.js"></script>
+</head>
+
+<body>
+    <div class="father">
+        <div class="son1"></div>
+        <div class="son2"></div>
+    </div>
+
+
+    <!-- <div class="ad1"></div>
+    <div class="ad2"></div>
+
+    <div class="dad">
+        <div class="son"></div>
+        <i></i>
+    </div> -->
+
+    <!-- <input type="button" id="button1" value="开始">
+    <input type="button" id="button2" value="终止">
+    <input type="text" value="倒计时" id="time"> -->
+
+    <script>
+        // $(function() {
+        //         let i = null
+        //         $('#button1').on('click', function() {
+        //             let m = 60
+        //             $('#time').val(m)
+        //             i = setInterval(() => {
+        //                 if (m > 0) {
+        //                     m--
+        //                     $('#time').val(m)
+        //                 } else {
+        //                     $('#time').val('倒计时')
+        //                     clearInterval(i)
+        //                 }
+        //             }, 1000);
+
+        //         })
+        //         $('#button2').on('click', function() {
+        //             $('#time').val('倒计时')
+        //             clearInterval(i)
+        //         })
+        //     })
+        // let arr = [5, 2, 3, 6, 8, 6, 5, 4, 7, 1, 9]
+        // // for (let i = 0; i < arr.length - 1; i++) {
+        // //     let flag = true
+        // //     for (let j = 0; j < arr.length - i - 1; j++) {
+        // //         if (arr[j] > arr[j + 1]) {
+        // //             flag = false
+        // //             let tem = arr[j]
+        // //             arr[j] = arr[j + 1]
+        // //             arr[j + 1] = tem
+        // //         }
+        // //     }
+        // //     if (flag === true) break
+        // // }
+        // // console.log(arr);
+
+        // // for (let i = 0; i < arr.length - 1; i++) {
+        // //     if (arr[i] === arr[i + 1]) {
+        // //         arr.splice(i, 1)
+        // //         i--
+        // //     }
+        // // }
+        // // console.log(arr);
+
+
+
+        // // var arr = [];
+        // // for (let i = 0; i < 10; i++) {
+        // //     arr.push(Math.floor(Math.random() * 91) + 10)
+        // // }
+
+
+
+        // // let foo = 'get-element-by-id'
+        // // let arr = foo.split('-')
+        // // for (let i = 0; i < arr.length; i++) {
+        // //     // arr[i] = arr[i].replace(arr[i].charAt(0), arr[i].charAt(0).toUpperCase())
+        // //     arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1)
+        // // }
+        // // let str = arr.join('')
+        // // console.log(str);
+
+
+
+
+
+        // // let url = 'http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e'
+
+        // // let params = url.split('?')[1]
+        // // let paramsArr = params.split('&')
+        // // let obj = {}
+        // // for (let i = 0; i < paramsArr.length; i++) {
+        // //     let paramsAttr = paramsArr[i].split('=')[0]
+        // //     let paramsVal = paramsArr[i].split('=')[1]
+        // //     obj[paramsAttr] = paramsVal
+        // // }
+
+        // // console.log(obj);
+
+
+        // let date = new Date();
+        // let y = date.getFullYear();
+        // let m = date.getMonth() + 1;
+        // let d = date.getDate();
+        // m = m < 10 ? '0' + m : m
+        // d = d < 10 ? '0' + d : d
+        // console.log(y + '-' + m + '-' + d);
+
+
+
+        // // var foo = 1;
+
+        // // function() {
+        // //     console.log(foo);
+        // //     var foo = 2;
+        // //     console.log(foo);
+        // // }
+
+
+        // // var txt = 'hx';
+        // // var txt;
+        // // console.log(txt);
+
+
+
+
+        // fn()
+
+        // var fn = function() {
+        //     console.log('var')
+        // }
+
+        // function fn() {
+        //     console.log('function')
+        // }
+
+
+        // fn()
+
+
+        // var arr = new Array(1, 3, 5);
+        // arr[4] = 'z';
+        // arr2 = arr.reverse();
+        // arr3 = arr.concat(arr2);
+        // console.log(arr3);
+        // console.log(arr3[1]);
+
+
+        // console.log('abcdefg'.substr(4));
+
+
+        // let exp = null
+        // if (!exp && typeof exp === 'object') {
+        //     alert(123);
+        // }
+
+
+        // {
+        //     let a = 1
+        // }
+        // console.log(a);
+
+
+
+        // fn()
+
+        // function fn() {
+        //     console.log('function')
+        // }
+        // var fn = function() {
+        //     console.log('var')
+        // }
+
+        // fn()
+
+
+        // console.log('asd'.startsWith('d'));
+        // console.log('asd'.endsWith('d'));
+        // console.log('asd'.repeat(3));
+        // console.log(Array.from(new Set([1, 2, 3])));
+
+
+
+        // function sum(...args) {
+        //     console.log(args);
+        // }
+        // sum(10, 20, 30)
+
+
+
+        // class Foo {
+        //     static prop = 2
+        // }
+        // let abc = new Foo()
+        // console.log(abc.prop);
+
+
+        // let arr1 = [1, 2, 3, 4]
+        // let arr2 = [1, 2, 3, 4]
+        // console.log(arr1.toString() === arr2.toString());
+
+        // function fn(arr1, arr2) {
+        //     for (let i = 0; i < arr1.length; i++) {
+        //         if (arr1[i] !== arr2[i]) {
+        //             return false
+        //         }
+        //     }
+        //     return true
+        // }
+        // console.log(fn(arr1, arr2));
+
+
+        // let num = 1234
+        // let str = num.toLocaleString()
+        // console.log(str);
+
+
+        // console.log(new Date().toLocaleString());
+        // console.log(new Date().toString());
+
+
+
+        // function closure() {
+        //     let a = 1
+        //     return function() {
+        //         return a
+        //     }
+        // }
+        // let b = closure()
+        // console.log(b());
+
+
+        // let reg = new RegExp(/[35]/)
+        // console.log(reg.test(55))
+        //     // let reg1 = /\d{3}-\d{8}|\d{4}-\d{7}/
+        //     // console.log(reg.test('010-12345678'))
+        // let reg2 = /^1[3|5]\d{9}$/
+        // console.log(reg2.test('13245678901'))
+        // let reg3 = /[1-9]\d{5,9}/
+        // console.log(reg3.test('13245678901'))
+        // let reg4 = /[a-zA-Z0-9_-]{5,9}/
+        // console.log(reg4.test('132'))
+
+
+        // let arr = [1, 2, 3, 4, 5, 6]
+        // let sum = arr.reduce((pre, next, i) => {
+        //     console.log(pre, next, i)
+        //     return pre + next
+        // })
+        // console.log(sum);
+
+
+        // const scores = [{
+        //     subject: 'math',
+        //     score: 88
+        // }, {
+        //     subject: 'chinese',
+        //     score: 95
+        // }, {
+        //     subject: 'english',
+        //     score: 80
+        // }];
+        // const dis = {
+        //     math: 0.5,
+        //     chinese: 0.3,
+        //     english: 0.2
+        // }
+        // let a = scores.reduce((pre, next) => {
+        //     return pre + next.score * dis[next.subject]
+        // }, 0)
+        // console.log(a)
+
+
+
+
+        // let obj1 = {
+        //     a: 1,
+        //     b: 2,
+        //     c: 3
+        // }
+        // let obj2 = obj1;
+
+        // obj1 = 1;
+        // console.log(obj2);
+
+
+
+        // Array.prototype.sum = function() {
+        //     // let sum = 0
+        //     // for (let i = 0; i < this.length; i++) {
+        //     //     sum += this[i]
+        //     // }
+        //     // return sum
+
+        //     return this.reduce((prev, next) => {
+        //         return prev + next
+        //     }, 0)
+
+        // };
+
+        // console.log([1, 2, 3, 4, 5].sum());
+
+
+
+
+        // function arg() {
+        //     console.log(arguments.length);
+        // }
+        // arg(1, 2)
+
+
+        // let arr = [1, 2, 3]
+
+        // console.log(arr.toLocaleString());
+        // console.log(arr.toString());
+
+
+        // console.log(typeof true.toString());
+
+        // console.log(typeof false.valueOf());
+
+
+        // console.log(typeof {
+        //     a: 1,
+        //     b: 2,
+        //     c: 3
+        // }.valueOf());
+
+
+
+        // var fn = []
+        // for (var i = 0; i < 10; i++) {
+        //     fn[i] = function(params) {
+        //         console.log(i + params);
+        //     }
+        // }
+        // fn[5](5)
+        // var data = {
+        //     a: 10,
+        //     b: 20
+        // }
+        // console.log('第' + i + '条数据:' + data);
+
+
+
+        // let arr = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+        // console.log([...new Set(arr)]);
+
+
+
+        // function mySort(arr) {
+        //     let flag = true
+        //     for (let i = 0; i < arr.length - 1; i++) {
+        //         for (let j = 0; j < arr.length - i - 1; j++) {
+        //             if (arr[j] > arr[j + 1]) {
+        //                 flag = false
+        //                 let tmp = arr[j]
+        //                 arr[j] = arr[j + 1]
+        //                 arr[j + 1] = tmp
+        //             }
+        //         }
+        //         if (flag) return arr
+        //     }
+        //     return arr
+        // }
+        // let arr = [1, 4, 2, 3, 6, 7, 9, 5]
+        // console.log(mySort(arr));
+
+
+
+        // let obj = {
+        //     fn1: () => {
+        //         console.log(this);
+        //         (() => {
+        //             console.log(this)
+        //         })()
+        //     },
+        //     fn2: function() {
+        //         console.log(this)
+        //     }
+        // }
+        // obj.fn1()
+        // obj.fn2()
+
+
+        // String.prototype.getThis = () => {
+        //     console.log(this);
+        // }
+        // '123'.getThis()
+
+
+        // let obj1 = {
+        //     abc: 0,
+        //     a: 0
+        // }
+        // let obj2 = {
+        //     a: 1,
+        //     b: 1
+        // }
+        // let obj3 = {
+        //     b: 2
+        // }
+        // let obj4 = {
+        //     b: 3,
+        //     c: 3
+        // }
+        // Object.assign(obj1, obj2, obj3, obj4)
+        // console.log(obj1)
+        // console.log(obj2)
+
+
+        // for (let index = 0; index < 10; index++) {
+        //     console.log(Math.floor(Math.random() * 6 + 5))
+        // }
+
+
+        // function sum(n) {
+        //     if (n >= 2) {
+        //         if (n % 2 === 0) {
+        //             return sum(n - 1) - 1 / n
+        //         } else {
+        //             return sum(n - 1) + 1 / n
+        //         }
+        //     } else {
+        //         return 1
+        //     }
+        // }
+        // console.log(sum(5));
+
+
+        // let arr = [1, 2, 3]
+        // console.log(arr.findIndex(ele => ele === 4));
+
+
+        // setTimeout(function() {
+        //     console.log('setTimeout');
+        // })
+
+        // new Promise(function(resolve) {
+        //     console.log('promise');
+        // }).then(function() {
+        //     console.log('console');
+        // })
+
+        // let a = new Promise(function(res) {
+        //     res(123)
+        // })
+        // a.then(function(res) {
+        //     console.log(res);
+        // })
+
+
+        // let str = '0123456'
+        // console.log(str.substring(0, 1));
+
+
+        // function A() {
+        //     this.name = 'a'
+        //     this.color = ['green', 'yellow']
+        // }
+
+        // function B() {}
+        // B.prototype = new A()
+
+        // let b1 = new B()
+        // let b2 = new B()
+
+        // b1.name = 'change'
+        // b1.color.push('black')
+
+        // console.log(b1);
+        // console.log(b2);
+
+
+        // let a = {
+        //     arr1: [1, 2, {
+        //         b: 1
+        //     }],
+        //     arr2: [3, 4]
+        // }
+        // let b = JSON.parse(JSON.stringify(a))
+        // b.d = 123
+        // console.log(a, b);
+
+
+        // let reg = /^[0-9]\d*$/
+        // console.log(reg.test(-1));
+
+
+        
+    </script>
+</body>
+
+</html>

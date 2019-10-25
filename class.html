@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: #0ff;
+            line-height: 200px;
+            ;
+            /* position: relative; */
+            /* display: table-cell; */
+            /* vertical-align: middle; */
+            text-align: center;
+        }
+        
+        .box2 {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: #f0f;
+            vertical-align: middle;
+            line-height: 100px;
+            /* vertical-align: middle; */
+            /* margin: auto;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0; */
+        }
+        
+        img {
+            height: 50px;
+            width: 50px;
+            vertical-align: middle;
+        }
+        
+        div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            display: inline-block;
+        }
+        
+        .align {
+            /*    vertical-align: top;*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <div class="box2">
+            <img src="./abc.jpg" alt="">
+        </div>
+    </div>
+
+    <div>
+    </div>
+    <div class="align">为什么？</div>
+    <script>
+        // class Star {
+        //     constructor(a, b) {
+        //         this.a = a
+        //         this.b = b
+        //     }
+        //     say(song) {
+        //         console.log(this.uname + '唱' + song);
+        //     }
+        //     sum() {
+        //         console.log(this.a + this.b);
+        //     }
+        // }
+        // class Son extends Star {}
+
+        // let ldh = new Star('ldh', 18)
+        // let zxy = new Star('zxy', 20)
+        // console.log(ldh);
+        // console.log(zxy);
+        // ldh.say('冰雨')
+        // let hhh = new Son(1, 2)
+        // hhh.say('hhh')
+        // hhh.sum()
+
+
+        // function Star(uname, age) {
+        //     this.uname = uname;
+        //     this.age = age;
+        //     this.sing = function() {
+        //         console.log('我会唱歌');
+        //     }
+        // }
+        // console.log(Star);
+
+        // Star.prototype.dance = function() {
+        //     console.log('dance')
+        // }
+        // let a = new Star('a', 15)
+        // let b = new Star('b', 16)
+
+        // console.log(a.__proto__ === Star.prototype);
+        // console.log(a.sing === b.sing);
+        // console.log(a.dance === b.dance);
+        // Star.run = function() {
+        //     console.log('run');
+        // }
+        // console.log(a.run);
+        // let c = new Star('c', 17)
+        // console.log(c);
+        // Star.prototype.rap = function() {
+        //     console.log('rap')
+        // }
+        // let d = new Star('d', 18)
+        // console.log(d);
+        // console.log(Star.prototype.constructor === d.__proto__.constructor);
+
+        // console.log(Star.prototype.constructor === Star)
+
+        // Star.prototype = {
+        //     basket() {
+        //         console.log('篮球');
+        //     }
+        // }
+        // console.log(Star);
+
+
+        function Father(uname, age) {
+            this.uname = uname
+            this.age = age
+        }
+        Father.prototype.money = function() {
+            return 100
+        }
+
+
+        function Son(uname, age, sex) {
+            Father.call(this, uname, age)
+            this.sex = sex
+        }
+        Son.prototype = new Father()
+        Son.prototype.constructor = Son
+        let son = new Son('草泥马', 18, '公')
+        console.log(son);
+    </script>
+</body>
+
+</html>

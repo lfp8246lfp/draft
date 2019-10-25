@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="list">
+    <li></li>
+    <li></li>
+    <li></li>
+  </div>
+  <script>
+// let map = new Map([
+//   ['F', 'no'],
+//   ['T', 'yes'],
+// ]);
+// for (let key of map.keys()) {
+//     console.log(key);
+// }
+// // "F"
+// // "T"
+// for (let value of map.values()) {
+//     console.log(value);
+// }
+// // "no"
+// // "yes"
+
+// // 以下三个效果类似
+// for (let item of map.entries()) {
+//     console.log(item[0], item[1]);
+// }
+// for (let [key, value] of map.entries()) {
+//     console.log(key, value);
+// }
+// for (let [key, value] of map) {
+//     console.log(key, value);
+// }
+// // "F" "no"
+// // "T" "yes"
+
+
+// let map = new Map([
+//   [1, 'one'],
+//   [2, 'two'],
+//   [3, 'three'],
+// ])
+// [...map.keys()]
+// // [1, 2, 3]
+// [...map.values()]
+// // ['one', 'two', 'three']
+// [...map.entries()]
+// // [[1,'one'], [2, 'two'], [3, 'three']]
+// [...map]
+// // [[1,'one'], [2, 'two'], [3, 'three']]
+
+
+// let s = Symbol('s')
+// console.log(s)
+//   //Symbol(s)
+
+
+
+// const obj = {}
+// const s = Symbol(obj);
+// console.log(s) // Symbol([object Object])
+
+// const fn = function() {return 123}
+// const ss = Symbol(fn);
+// console.log(ss) // Symbol(function() {return 123})
+
+
+
+// // 没有参数的情况
+// var s1 = Symbol()
+// var s2 = Symbol()
+// s1 === s2 // false
+// // 有参数的情况
+// var s1 = Symbol('foo')
+// var s2 = Symbol('foo')
+// s1 === s2 // false
+
+
+// var sym = Symbol();
+// String(sym) // 'Symbol()'
+// sym.toString() // 'Symbol()'
+// sym + '' // 报错
+
+
+// let s = Symbol()
+// console.log(Boolean(s)) // true
+// console.log(!s) //false
+
+
+// console.log(Number(s)) // 报错
+// console.log(s + 2)  // 报错
+
+
+
+// var mySymbol = Symbol();
+// // 第一种写法
+// var a = {};
+// a[mySymbol] = 'Hello!';
+// // 第二种写法
+// var a = {
+//   [mySymbol]: 'Hello!'
+// };
+// // 第三种写法
+// var a = {};
+// Object.defineProperty(a, mySymbol, { value: 'Hello!' });
+// // 以上写法都得到同样结果
+// a[mySymbol] // "Hello!"
+
+
+// let s1 = Symbol(1)
+// let s2 = Symbol(2)
+// let obj = {}
+// obj[s1] = 1
+// obj[s2] = 2
+// obj.a = 3
+
+// console.log(obj)  
+//   // {a: 3, Symbol(1): 1, Symbol(2): 2}
+// for (let i in obj) {
+//   console.log(i)  // a
+// }
+
+// console.log(Object.getOwnPropertySymbols(obj))
+//   // [Symbol(1), Symbol(2)]
+
+
+
+// let obj = {
+//   [Symbol()]: 1,
+//   a: 2,
+//   b: 3
+// }
+// console.log(Reflect.ownKeys(obj))
+// // ["a", "b", Symbol()]
+
+
+// let s1 = Symbol.for(1)
+// let s2 = Symbol.for(1)
+// console.log(s1 === s2)  // true
+
+
+// Symbol.for("bar") === Symbol.for("bar")
+// // true
+// Symbol("bar") === Symbol("bar")
+// // false
+
+
+// let s1 = Symbol.for('s1')
+// let s2 = Symbol('s2')
+
+// Symbol.keyFor(s1)  // 's1'
+// Symbol.keyFor(s2)  // undefined
+
+
+// function fn () {
+//   console.log(this)
+// }
+// let obj = {a:1}
+// fn.call(obj)
+
+
+// function f(x){
+//   return g(x);
+// }
+
+
+// // 情况一
+// function f(x){
+//   let y = g(x)
+//   return y
+// }
+// // 情况二
+// function f(x){
+//   return g(x) + 1
+// }
+// // 情况三
+// function f(x){
+//   g(x)
+// }
+
+
+// function fb (n) {
+//   if (n <= 2) return 1
+//   return fb(n - 2) + fb(n - 1)
+// }
+
+
+// let promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         if (true) {
+//             resolve({a: 1})
+//         }else {
+//             reject('失败了')
+//         }
+//     }, 0)
+// })
+// promise.then(res => {
+//   console.log(res)  // {a: 1}
+//   return res.a
+// }).then(res => {
+//   console.log(res)  // 1
+//   return res.err
+// }).then(res => console.log('res',res), err => console.log('err', err))
+//   // undefined
+
+
+// let p = new Promise((res, rej) => {
+//   throw new Error('err')
+// })
+
+// p.catch(err => console.log(err))
+
+
+// // 写法一
+// let pp = new Promise((resolve, reject) => {
+//   try {
+//     throw new Error('test');
+//   } catch(e) {
+//     reject(e)
+//   }
+// })
+// pp.catch(error => console.log(error))
+//   // Error: test
+
+// // 写法二
+// var ppp = new Promise((resolve, reject) => {
+//   reject(new Error('test'))
+// })
+// ppp.catch(error => console.log(error))
+//   // Error: test
+
+
+
+// var p1 = new Promise((resolve, reject) => {
+//   resolve({a:1})
+//   throw new Error('test')
+// })
+
+// p1.then(res => {
+//   console.log(res)
+//   x + 2
+// })
+// // .catch(err => {
+// //   console.log(err)
+// // })
+// .then(res => {
+//   console.log(res)
+//   y + 2
+// })
+// .catch(err => console.log(err))
+
+
+// var p = new Promise((resolve, reject) => {
+//   resolve(x + 2)
+// })
+// p
+// .then(res => console.log(res))
+
+
+
+
+
+// Promise.resolve(123).then(res => console.log(res))
+//   // 123
+
+// Promise.resolve().then(res => console.log(res))
+
+
+
+
+//     const arr = ["a",["b","c",["d"],[undefined,"g",["x"],["y"]]],"h",["l"]];
+//     const [,[,,,[u,,[x]]]] = arr
+//     console.log(u,x)
+
+
+//     let node = {
+//     type: 'identifier',
+//     name: 'ES',
+//     loc: {
+//         start: ['line', 'column'],
+//         end: {
+//             line: 1,
+//             column: 4
+//         }
+//     }
+// }
+
+// let {loc:{start:[line1], end:{line}}} = node
+
+
+
+
+// function fn( {
+//             a = 1,
+//             b
+//         } ) {
+//             console.log(a,b)
+//         }
+//         fn({b:3})
+
+
+
+// var arr = [{'name':'a','price':'0'},{'name':'b','price':'0'}]
+// for(var i = 0;i<arr.length;i++) {
+//     if (arr[i].price ==='0') arr.splice(i,1)
+// }
+// console.log(arr);
+        
+        
+        
+// let arr = [1,4,3,8,2]
+// arr.sort((a,b) => a - b)
+// console.log(arr);
+
+
+// console.log(2**3)
+
+// console.log(Array.from(new Set([1,2,3])) instanceof Array)
+
+// console.log(Array.of(2))
+
+
+
+let iter = [1,2,3][Symbol.iterator]()
+// {value: 1, done: false}
+iter.next()
+// {value: 1, done: false}
+iter.next()
+// {value: 1, done: false}
+iter.next()
+// {value: 1, done: false}
+iter.next()
+// {value: undefined, done: true}
+
+
+
+function fn(a,b) {
+  let iter =  arguments[Symbol.iterator]()
+  return [iter.next(), iter.next(), iter.next(), iter.next()]
+}
+console.log(fn(1,2))
+// [{value: 1, done: false}, {value: 2, done: false}, {value: undefined, done: true}, {value: undefined, done: true}]
+
+
+
+
+let iter2 = document.querySelector('.list').querySelectorAll('li')[Symbol.iterator]()
+
+console.log(iter2.next())
+console.log(iter2.next())
+console.log(iter2.next())
+console.log(iter2.next())
+
+
+
+;(function fn() {
+let arrLike = {
+  0: 'a',
+  1: 'b',
+  2: 'c',
+  length: 3,
+  [Symbol.iterator]: Array.prototype[Symbol.iterator]
+}
+// arrLike[Symbol.iterator]().next()
+for (item of arrLike) {
+  // console.log(item)
+}
+
+let iter = arrLike[Symbol.iterator]()
+let enu = iter.next()
+while(!enu.done) {
+  console.log(enu.value)
+  enu = iter.next()
+}
+})()
+
+;(function fn1() {
+  let arr = [1,2,3]
+  for(item of arr) {
+    console.log(item)
+    console.log(arr[Symbol.iterator]())
+  }
+  console.log(Array.prototype[Symbol.iterator]())
+})()
+
+;(function fn2() {
+
+let set = new Set([1,2,3])
+for (item of set) {
+  console.log(item)
+}
+
+let map = new Map([['a',1],[{a:1},2]])
+for (item of map) {
+  console.log(item)
+}
+})()
+
+
+;(function fn3() {
+
+function* generator() {
+  yield 1
+  yield 2
+  return 3
+}
+let gen = generator()
+console.log(gen)
+console.log(gen.next())
+// {value: 1, done: false}
+console.log(gen.next())
+// {value: 2, done: false}
+console.log(gen.next())
+// {value: 3, done: true}
+console.log(gen.next())
+// {value: undefined, done: true}
+
+})()
+
+;(function fn5() {
+function* demo() {
+  // console.log('Hello' + yield); // SyntaxError
+  // console.log('Hello' + yield 123); // SyntaxError
+  console.log('Hello' + (yield)); // OK
+  console.log('Hello' + (yield 123)); // OK
+}
+})()
+
+;(function fn6() {
+let arrLike = {
+  0: 1,
+  1: 2,
+  2: 3,
+  length: 3,
+  [Symbol.iterator]: Array.prototype[Symbol.iterator]
+}
+console.log([...arrLike])
+})()
+
+;(function fn() {
+  let obj = {
+    [Symbol.iterator]: function* () {
+      yield 1
+      yield 2
+      yield 3
+    }
+  }
+  console.log([...obj])
+
+})()
+
+;(function fn() {
+  let arr = []
+  console.log(arr[Symbol.iterator]()[Symbol.iterator]())
+})()
+
+;(function fn() {
+  function* gen() {}
+  let g = gen()
+  console.log(g[Symbol.iterator]() === g)
+})()
+
+;(function fn() {
+console.log('----------')
+  function* gen() {}
+  console.log(gen())
+})()
+
+;(function fn() {
+  console.log('--------------------')
+  function* foo(x) {
+    var y = 2 * (yield (x + 1));
+    var z = yield (y / 3);
+    return (x + y + z);
+  }
+  var a = foo(5);
+  a.next() // Object{value:6, done:false}
+  a.next() // Object{value:NaN, done:false}
+  a.next() // Object{value:NaN, done:true}
+  var b = foo(5);
+  b.next() // { value:6, done:false }
+  b.next(12) // { value:8, done:false }
+  b.next(13) // { value:42, done:true }
+})()
+
+
+;(function fn() {
+  console.log('--------------------')
+  function* gen() {
+    yield 1
+    yield 2
+    yield 3
+    return 4
+  }
+  for (item of gen()) {
+    console.log(item)
+  }
+})()
+
+;(function fn() {
+  console.log('--------------------')
+  
+  function* gen() {
+    for (key of Object.keys(this)) {
+      yield [key, this[key]]
+    }
+  }
+  let obj = {a:1,b:2}
+  obj[Symbol.iterator] = gen
+  for ([key, value] of obj) {
+    console.log(key, value)
+    // a 1
+    // b 2
+  }
+})()
+
+;(function fn() {
+  console.log('--------------------')
+  let obj = {a:1,b:2,c:3,d:4,e:5}
+  for (item of Object.keys(obj).map(item => obj[item])) {
+    console.log(item)
+  }
+})()
+
+
+;(function fn() {
+  console.log('--------------------')
+  function* numbers () {
+    yield 1
+    yield 2
+    return 3
+  }
+  // 扩展运算符
+  [...numbers()] // [1, 2]
+  // Array.from 方法
+  Array.from(numbers()) // [1, 2]
+  // 解构赋值
+  let [x, y] = numbers();
+  x // 1
+  y // 2
+  // for...of 循环
+  for (let n of numbers()) {
+  console.log(n)
+  }
+  // 1
+  // 2
+})()
+
+
+;(function fn() {
+  console.log('--------------------')
+  function* g() {
+    yield 1
+    yield 2
+  }
+  function* gen() {
+    yield 0
+    yield* g()
+    yield 3
+  }
+
+  // 等同于
+  // function* gen() {
+  //   yield 0
+  //   yield 1
+  //   yield 2
+  //   yield 3
+  // }
+
+  // 等同于
+  // function* gen() {
+  //   yield 0
+  //   for (gen of g()) {
+  //     yield gen
+  //   }
+  //   yield 3
+  // }
+
+
+  for (item of gen()) {
+    console.log(item)
+    // 0 1 2 3
+  }
+})()
+
+
+;(function fn() {
+  console.log('--------------------')
+  function* gen() {
+    yield* [1,2,3]
+    yield* 'abc'
+  }
+  for (item of gen()) {
+    console.log(item)
+    // 1 2 3 'a' 'b' 'c'
+  }
+})()
+
+
+;(function fn() {
+  console.log('--------------------')
+  function* gen() {
+    yield 1
+    return '被代理generator函数的返回值'
+  }
+  function* generator() {
+    var g = yield* gen()
+    console.log(g)
+  }
+  let iter = generator()
+  console.log(iter.next())
+  // {value: 1, done: false}
+  console.log(iter.next())
+  // '被代理generator函数的返回值'
+  // {value: undefined, done: true}
+})()
+
+;(function fn() {
+  console.log('--------------------')
+  function* gen() {
+    yield 1
+    yield 2
+    return '被代理generator函数的返回值'
+  }
+  function* generator() {
+    var g = yield* gen()
+    console.log(g)
+  }
+  console.log([...generator()])
+})()
+
+;(function fn() {
+  console.log('--------------------')
+  function* generator(arr) {
+    if (Array.isArray(arr)) {
+      for (const item of arr) {
+        yield* generator(item)
+      }
+    } else {
+      yield arr
+    }
+  }
+  let arr = [1,[2,[4]],[3]]
+  for (const item of generator(arr)) {
+    console.log(item)
+    // 1 2 4 3
+  }
+})()
+
+;(function fn() {
+  console.log('--------------------')
+  let obj = {
+    * generator() {
+      yield 1
+      yield 2
+    },
+    //等同于
+    gen: function* () {
+      yield 3
+      yield 4
+    }
+  }
+  console.log([...obj.generator()])
+  // [1,2]
+  console.log([...obj.gen()])
+  // [3,4]
+})()
+
+  </script>
+</body>
+</html>
