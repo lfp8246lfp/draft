@@ -15,7 +15,9 @@
     console.log(Array.isArray(arr)) // true
 
 
-    // 过去三十天组成的数组
+;(function fn() {
+  console.log('--------------------')
+      // 过去三十天组成的数组
     let month = new Array(30).fill(undefined)
     console.log(month)
 
@@ -24,9 +26,13 @@
       return day.getMonth() + 1 + '-' + day.getDate()
     }).reverse()
     console.log(lastMonth)
+})()
 
 
-    function Foo() {
+    ;(function fn() {
+      console.log('--------------------')
+      // 后++
+      function Foo() {
       var i = 0;
       return function() {
         console.log(i++)
@@ -37,6 +43,17 @@
 
     var j = 0
     console.log(j++)
+    })()
+
+
+
+    ;(function fn() {
+      console.log('--------------------')
+      console.log((() => 1) instanceof Function)
+      console.log((() => 1) instanceof Object)
+    })()
+
+
   </script>
 </body>
 </html>

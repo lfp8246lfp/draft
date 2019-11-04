@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #chart {
+      width: 500px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <script src="echarts.min.js"></script>
+  <div id="chart"></div>
+  <script>
+    let chart = echarts.init(document.getElementById('chart'))
+    let option = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [{
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line'
+      }]
+    }
+    chart.setOption(option)
+  </script>
+</body>
+</html>

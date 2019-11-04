@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./axios.js"></script>
+  <script>
+    let provinces = []
+    let cities = []
+    let areas = []
+    axios.get('./map.json').then(res => {
+      for (var item in res.data) {
+          if (item.match(/0000$/)) {
+            provinces.push({id: item, value: res.data[item], children: []})
+          } else if (item.match(/00$/)) {
+            cities.push({id: item, value: res.data[item], children: []})
+          } else {
+            areas.push({id: item, value: res.data[item]})
+          }
+      }
+
+      for (var item of provinces) {
+          item.children = cities.filter(ele => ele.id.slice(0, 2) === item.id.slice(0, 2))
+          for (var subItem of item.children) {
+            subItem.children = areas.filter(ele => ele.id.slice(0, 4) === subItem.id.slice(0, 4))
+          }
+      }
+      
+      document.write(JSON.stringify(provinces))
+    })
+  </script>
+</body>
+</html>

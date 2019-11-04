@@ -673,6 +673,74 @@ console.log('----------')
   // [3,4]
 })()
 
+
+;(function fn() {
+  console.log('--------------------')
+  function* generator() {
+    yield 1
+  }
+  generator() instanceof generator
+  // true
+  
+  generator.prototype.hello = () => 'hello'
+  generator().hello()
+  // 'hello'
+})()
+
+
+;(function fn() {
+  console.log('--------------------')
+  function* generator() {
+    yield console.log('第一次调用next')
+    console.log('第二次调用next')
+  }
+  let g = generator()
+
+  let n1 = g.next()
+  // '第一次调用next'
+  let n2 = g.next()
+  // '第二次调用next'
+})()
+
+
+;(function sandbox() {
+  console.log('--------------------')
+  function* gen() {
+    yield setTimeout(() => console.log('异步1'), 2000)
+    yield setTimeout(() => console.log('异步2'), 1000)
+    yield setTimeout(() => console.log('异步3'), 0)
+  }
+  let g = gen()
+  // g.next()
+})()
+
+
+;(function sandbox() {
+  console.log('--------------------')
+  class Person {
+    constructor (name, age) {
+      this.name = name
+      this.age = age
+    }
+    say (hello) {
+      console.log('hhh')
+    }
+  }
+
+  console.log(typeof Person)
+  // function
+
+  let arr = [1571673600, 1571760000, 1571846400, 1571932800]
+
+  console.log(arr.map(item => getDateEig(item)))
+  function getDateEig(date) {
+    return new Date(date).getMonth() + 1 + '-' + new Date(date).getDate()
+  }
+
+
+
+})()
+
   </script>
 </body>
 </html>
