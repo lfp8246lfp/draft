@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+;(function sandbox() {
+  console.log('--------------------')
+let orders = [{"no":"CUS11466","content":null,"print_times":"未打包","forecast_code":"HTFLY8272071320YQ","time":"2019-09-07 09:44:43","print_time":"2019-08-02 11:27:56","SHIPPING WAY":"HT","forecast_system_weight":0.31,"_describe":"1","date":"2019-00-01","cco_no":null,"user_name":"admin2","box":null,"have":null,"box_time":null,"manager_name":"admin","print_person":"admin","ship_check_person":"admin","order_other":"label:special","states":[{"id":"288d56ea841211e9856959c0cc3476ee","no":"CUS11466","SKU":"CUS-5-DHOODIE-L","state":1,"weight":null,"content_other":"color:黑色;"},{"id":"288d56eb841211e9856959c0cc3476ee","no":"CUS11466","SKU":"11466-CUS-2-DHOODIE-L","state":1,"weight":null,"content_other":"color:黑色;"}],"sku":"11466-CUS-2-DHOODIE-L"}]
+
+console.log(orders)
+
+let exportOrders = []
+orders[0].states.forEach(item => {
+  let obj = {...orders[0]}
+  obj.sku = item.SKU
+  delete obj.states
+  exportOrders.push(obj)
+})
+console.log(exportOrders)
+
+
+let data = [{"no":"CUS11466","content":null,"print_times":"未打包","forecast_code":"HTFLY8272071320YQ","time":"2019-09-07 09:44:43","print_time":"2019-08-02 11:27:56","SHIPPING WAY":"HT","forecast_system_weight":0.31,"_describe":"1","date":"2019-00-01","cco_no":null,"user_name":"admin2","box":null,"have":null,"box_time":null,"manager_name":"admin","print_person":"admin","ship_check_person":"admin","order_other":"label:special","states":[{"id":"288d56ea841211e9856959c0cc3476ee","no":"CUS11466","SKU":"CUS-5-DHOODIE-L","state":1,"weight":null,"content_other":"color:黑色;"},{"id":"288d56eb841211e9856959c0cc3476ee","no":"CUS11466","SKU":"11466-CUS-2-DHOODIE-L","state":1,"weight":null,"content_other":"color:黑色;"}],"sku":"11466-CUS-2-DHOODIE-L"},{"no":"CUS11466","content":null,"print_times":"未打包","forecast_code":"HTFLY8272071320YQ","time":"2019-09-07 09:44:43","print_time":"2019-08-02 11:27:56","SHIPPING WAY":"HT","forecast_system_weight":0.31,"_describe":"1","date":"2019-00-01","cco_no":null,"user_name":"admin2","box":null,"have":null,"box_time":null,"manager_name":"admin","print_person":"admin","ship_check_person":"admin","order_other":"label:special","states":[{"id":"288d56ea841211e9856959c0cc3476ee","no":"CUS11466","SKU":"CUS-5-DHOODIE-L","state":1,"weight":null,"content_other":"color:黑色;"},{"id":"288d56eb841211e9856959c0cc3476ee","no":"CUS11466","SKU":"11466-CUS-2-DHOODIE-L","state":1,"weight":null,"content_other":"color:黑色;"}],"sku":"11466-CUS-2-DHOODIE-L"}]
+console.log(data)
+})()
+  </script>
+</body>
+</html>

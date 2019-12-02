@@ -7,7 +7,11 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- a的download属性 -->
-  <a href="./abc.jpg" download="飞龙在天">飞龙在天</a>
+  <script src="./axios.js"></script>
+  <script>
+      let blob = new Blob(['123', '456'], {type: 'application/vnd.ms-excel'})
+      href = URL.createObjectURL(blob)
+      window.location.href = href
+  </script>
 </body>
 </html>

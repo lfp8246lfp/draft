@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+;(function sandbox() {
+  console.log('--------------------')
+  for (let i = 0; i < 3; i++) {
+    let i = 'abc'
+    console.log(i)
+    // 'abc' 'abc' 'abc'
+  }
+})()
+
+;(function sandbox() {
+  console.log('--------------------')
+  // 报错
+  function func() {
+    let a = 10;
+    // var a = 1;
+  }
+  // 报错
+  function func() {
+    let a = 10;
+    // let a = 1;
+  }
+})()
+
+;(function sandbox() {
+  console.log('--------------------')
+  function fn (a) {
+    // let a
+  }
+})()
+
+{
+  const a = 1
+  // a = 2
+}
+
+{
+  let a
+  ({a} = {a: 1})
+  console.log(a)
+}
+  </script>
+</body>
+</html>

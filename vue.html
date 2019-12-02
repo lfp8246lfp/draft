@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="btn">按钮</button>
+    <div class="msg" ref="msgRef"></div>
+
+    <div v-for="(item, index) in arr" :key="index">{{item}}</div>
+    <button @click="addBox">增加</button>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        arr: []
+      },
+      methods: {
+        btn () {
+          let span = document.createElement('span')
+          span.innerHTML = 'hhhhhhhhhhhhhhhhhhhhhhhhhh'
+          // this.$refs.msgRef.appendChild(span)
+          // document.body.appendChild(span)
+          document.querySelector('.msg').appendChild(span)
+        },
+        addBox () {
+          this.arr.push(this.arr.length + 1)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

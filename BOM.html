@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //不会报错，因为这是对window的一次属性查询
+    let a = window.a
+    console.log('screenLeft', window.screenLeft)
+    console.log('screenTop', window.screenTop)
+    console.log('-------')
+    console.log('screenX', window.screenX)
+    console.log('screenY', window.screenY)
+    console.log('-------')
+    console.log('innerWidth', window.innerWidth)
+    console.log('innerHeight', window.innerHeight)
+    console.log('-------')
+    console.log('outerWidth', window.outerWidth)
+    console.log('outerHeight', window.outerHeight)
+    console.log('-------')
+    console.log('document.documentElement.clientWidth', document.documentElement.clientWidth)
+    console.log('document.documentElement.clientHeight', document.documentElement.clientHeight)
+  </script>
+</body>
+</html>

@@ -8,12 +8,20 @@
 </head>
 <body>
   <script>
-    // 对象数组不能用reduce？？？
+    let objArr = [{a: 1}, {a: 2}, {a: 3}]
+    let total = objArr.reduce((prev, next) => prev + next.a, 0)
+    console.log(total)
     
     console.log([1,2,3].join())
-    let arr = [1,2,3]
-    arr.splice(3)
-    console.log(arr)
+    // '1,2,3'
+    
+
+    ;(function sandbox() {
+      console.log('--------------------')
+      let arr = [1,2,3,4,5]
+      let a = arr.every(item => item === 3)
+      console.log(a)
+    })()
   </script>
 </body>
 </html>

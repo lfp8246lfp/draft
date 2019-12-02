@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .box {
+      height: 10000px;
+      /* padding: 100px; */
+      background-color: #2af;
+      box-sizing: border-box;
+    }
+    #bar {
+      position: fixed;
+      width: 1000px;
+      height: 10px;
+      top: 0;
+      left: 0;
+      background-color: #dfd;
+    }
+    .progress {
+      width: 0%;
+      height: 100%;
+      background-color: #e49;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+      <div id="bar">
+          <div class="progress"></div>
+      </div>
+  </div>
+  <script>
+    let box = document.querySelector('.box')
+    let p = document.querySelector('.progress')
+    let bar = document.querySelector('#bar')
+    console.log(document.body.clientHeight)
+    console.log(document.body.clientWidth)
+    console.log(document.documentElement.clientWidth)
+    console.log(document.documentElement.clientHeight)
+    bar.style.width = document.documentElement.clientWidth + 'px'
+    window.onscroll = () => {
+      let scroll = window.pageYOffset
+      let height = box.offsetHeight
+      let width = bar.offsetWidth
+      let clientH = document.documentElement.clientHeight
+      console.log(scroll, height)
+      p.style.width = scroll / (height - clientH) * width + 'px'
+    }
+  </script>
+</body>
+</html>

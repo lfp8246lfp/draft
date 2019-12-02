@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+{
+  let [a] = new Set([1,2])
+  // console.log(a)
+}
+
+{
+  function* gen() {
+    yield 1
+    yield 2
+    yield 3
+  }
+  let [a,b,c] = gen()
+  a,b,c // 1, 2, 3
+}
+
+{
+  let f = () => {
+    console.log('abc')
+  }
+  let arr = [undefined]
+  let [x = f()] = arr
+  console.log(x)
+  // 'abc'
+  // x = undefined
+}
+
+{
+  let obj = {arr: [{n: 1}]}
+  let {arr, arr:[{n}]} = obj
+  arr, n
+  // [{n:1}], 1
+}
+  </script>
+</body>
+</html>

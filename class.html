@@ -1,153 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        .box1 {
-            width: 200px;
-            height: 200px;
-            background-color: #0ff;
-            line-height: 200px;
-            ;
-            /* position: relative; */
-            /* display: table-cell; */
-            /* vertical-align: middle; */
-            text-align: center;
-        }
-        
-        .box2 {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-            background-color: #f0f;
-            vertical-align: middle;
-            line-height: 100px;
-            /* vertical-align: middle; */
-            /* margin: auto;
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0; */
-        }
-        
-        img {
-            height: 50px;
-            width: 50px;
-            vertical-align: middle;
-        }
-        
-        div {
-            width: 100px;
-            height: 100px;
-            border: 1px solid red;
-            display: inline-block;
-        }
-        
-        .align {
-            /*    vertical-align: top;*/
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
-
 <body>
-    <div class="box1">
-        <div class="box2">
-            <img src="./abc.jpg" alt="">
-        </div>
-    </div>
+  <script>
+;(() => {
+  class Point {
+    constructor(a, b) {
+      this.a = a
+      this.b = b
+      this.z = 100
+    }
+    toString() {
+      return this.a + this.b
+    }
+    static s () {
+      return this
+    }
+    static k = 123
+  }
+  Point.prop = 10086
+  let p = new Point(1,2)
+  console.log(p)
 
-    <div>
-    </div>
-    <div class="align">为什么？</div>
-    <script>
-        // class Star {
-        //     constructor(a, b) {
-        //         this.a = a
-        //         this.b = b
-        //     }
-        //     say(song) {
-        //         console.log(this.uname + '唱' + song);
-        //     }
-        //     sum() {
-        //         console.log(this.a + this.b);
-        //     }
-        // }
-        // class Son extends Star {}
+  console.log(p.k)
+  console.log(Point.s())
+  console.log(Point.p)
+  console.log(Point.prop)
 
-        // let ldh = new Star('ldh', 18)
-        // let zxy = new Star('zxy', 20)
-        // console.log(ldh);
-        // console.log(zxy);
-        // ldh.say('冰雨')
-        // let hhh = new Son(1, 2)
-        // hhh.say('hhh')
-        // hhh.sum()
+  console.log(Point)
+  console.log(Point.prototype)
 
+  console.log(typeof Point)
+  // function
+  console.log(typeof p)
+  // object
+  console.log(Point === Point.prototype.constructor)
+  // true
+  console.log(p.constructor === Point.prototype.constructor)
+  // true
 
-        // function Star(uname, age) {
-        //     this.uname = uname;
-        //     this.age = age;
-        //     this.sing = function() {
-        //         console.log('我会唱歌');
-        //     }
-        // }
-        // console.log(Star);
+  console.log(p.__proto__)
+  console.log(Object.getPrototypeOf(p) === p.__proto__)
+  // true
 
-        // Star.prototype.dance = function() {
-        //     console.log('dance')
-        // }
-        // let a = new Star('a', 15)
-        // let b = new Star('b', 16)
+  console.log(Object.keys(Point.prototype))
+  
+  function A(x) {
+    this.x = x
+  }
+  let a = new A(1)
+  console.log(a)
+  A.prototype.a = () => 123
+  A.prototype.b = 1
+  console.log(Object.keys(A.prototype))
 
-        // console.log(a.__proto__ === Star.prototype);
-        // console.log(a.sing === b.sing);
-        // console.log(a.dance === b.dance);
-        // Star.run = function() {
-        //     console.log('run');
-        // }
-        // console.log(a.run);
-        // let c = new Star('c', 17)
-        // console.log(c);
-        // Star.prototype.rap = function() {
-        //     console.log('rap')
-        // }
-        // let d = new Star('d', 18)
-        // console.log(d);
-        // console.log(Star.prototype.constructor === d.__proto__.constructor);
+  class B extends Point {
+    constructor(a,b,c) {
+      super(a,b)
+      this.c = c
+    }
+    toString() {
+      return super.toString() + this.c
+    }
+    static fn() {
+      return super.s()
+    }
+  }
+  let b = new B(3,4,5)
+  console.log(b)
+  console.log(b.toString())
+  B.s()
+  console.log(B.prop)
 
-        // console.log(Star.prototype.constructor === Star)
+  Object.getPrototypeOf(B) === Point
+  // true
+  console.log(b.__proto__)
+  console.log(B.fn())
+})()
 
-        // Star.prototype = {
-        //     basket() {
-        //         console.log('篮球');
-        //     }
-        // }
-        // console.log(Star);
-
-
-        function Father(uname, age) {
-            this.uname = uname
-            this.age = age
-        }
-        Father.prototype.money = function() {
-            return 100
-        }
-
-
-        function Son(uname, age, sex) {
-            Father.call(this, uname, age)
-            this.sex = sex
-        }
-        Son.prototype = new Father()
-        Son.prototype.constructor = Son
-        let son = new Son('草泥马', 18, '公')
-        console.log(son);
-    </script>
+  </script>
 </body>
-
 </html>
