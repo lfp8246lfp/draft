@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./ele/theme-chalk/index.css">
+</head>
+<body>
+  <div id="app">
+    <el-table :data="arr" border style="width: 20%">
+      <el-table-column
+        prop="name"
+        label="名称">
+      </el-table-column>
+      <el-table-column
+        prop="value"
+        label="值">
+      </el-table-column>
+    </el-table>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./ele/index.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        arr: [
+          {name: 'a', value: 1},
+          {name: 'b', value: 2},
+          {name: 'c', value: 3},
+          {name: 'd', value: 4},
+          {name: 'e', value: 5},
+          {name: 'f', value: 6},
+          {name: 'g', value: 7},
+          {name: 'h', value: 8},
+          {name: 'i', value: 9},
+          {name: 'a', value: 1},
+          {name: 'b', value: 2},
+          {name: 'c', value: 3},
+          {name: 'd', value: 4},
+          {name: 'e', value: 5},
+          {name: 'f', value: 6},
+          {name: 'g', value: 7},
+          {name: 'h', value: 8},
+          {name: 'i', value: 9},
+          {name: 'a', value: 1},
+          {name: 'b', value: 2},
+          {name: 'c', value: 3},
+          {name: 'd', value: 4},
+          {name: 'e', value: 5},
+          {name: 'f', value: 6},
+          {name: 'g', value: 7},
+          {name: 'h', value: 8},
+          {name: 'i', value: 9},
+          {name: 'a', value: 1},
+          {name: 'b', value: 2},
+          {name: 'c', value: 3},
+          {name: 'd', value: 4},
+          {name: 'e', value: 5},
+          {name: 'f', value: 6},
+          {name: 'g', value: 7},
+          {name: 'h', value: 8},
+          {name: 'i', value: 9},
+          {name: 'a', value: 1},
+          {name: 'b', value: 2},
+          {name: 'c', value: 3},
+          {name: 'd', value: 4},
+          {name: 'e', value: 5},
+          {name: 'f', value: 6},
+          {name: 'g', value: 7},
+          {name: 'h', value: 8},
+          {name: 'i', value: 9},
+        ]
+      },
+    })
+  </script>
+</body>
+</html>

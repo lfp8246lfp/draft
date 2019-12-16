@@ -8,29 +8,63 @@
 </head>
 <body>
   <div id="app">
-    <button @click="btn">按钮</button>
-    <div class="msg" ref="msgRef"></div>
+    <div class="box" @click="active = false">
+        <button @click="btn">按钮</button>
+        <div class="msg" ref="msgRef"></div>
+        
+        <br>
 
-    <div v-for="(item, index) in arr" :key="index">{{item}}</div>
-    <button @click="addBox">增加</button>
+        <button @click="addBox">增加</button>
+        <ul>
+          <li v-for="(item, index) in arr" :key="index">{{item}}</li>
+        </ul>
+
+        <br>
+
+        <button @click.stop="open">下拉框{{n}}</button>
+        <ul v-show="active" style="width:100px;height:100px;background:#0aa;text-align:center;">
+          <li>
+            <button @click="turn">选项一</button>
+          </li>
+          <li>
+            <button @click="turn">选项二</button>
+          </li>
+        </ul>
+    </div>
   </div>
   <script src="./vue.js"></script>
   <script>
     let vm = new Vue({
       el: '#app',
-      data: {
-        arr: []
+      data() {
+        return {
+          arr: [],
+          active: false,
+          n: 1,
+          d: this,
+          m: this.btn
+        }
+      },
+      mounted() {
+        console.log(this.m)
       },
       methods: {
         btn () {
           let span = document.createElement('span')
-          span.innerHTML = 'hhhhhhhhhhhhhhhhhhhhhhhhhh'
+          span.innerHTML = 'h'
           // this.$refs.msgRef.appendChild(span)
           // document.body.appendChild(span)
           document.querySelector('.msg').appendChild(span)
+          this.active = false
         },
         addBox () {
           this.arr.push(this.arr.length + 1)
+        },
+        open() {
+          this.active = !this.active
+        },
+        turn() {
+          this.n = 3
         }
       }
     })
