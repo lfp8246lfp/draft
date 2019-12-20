@@ -8,20 +8,97 @@
 </head>
 <body>
   <script>
-    let objArr = [{a: 1}, {a: 2}, {a: 3}]
-    let total = objArr.reduce((prev, next) => prev + next.a, 0)
-    console.log(total)
-    
-    console.log([1,2,3].join())
-    // '1,2,3'
-    
-
-    ;(function sandbox() {
+    {
+      // 对象属性的reduce写法
+      let objArr = [{a: 1}, {a: 2}, {a: 3}]
+      let total = objArr.reduce((prev, next) => prev + next.a, 0)
+      console.log(total)
       console.log('--------------------')
+    }
+
+    {
+      // join
+      console.log([1,2,3].join())
+      // '1,2,3'
+      console.log('--------------------')
+    }
+
+    {
       let arr = [1,2,3,4,5]
       let a = arr.every(item => item === 3)
       console.log(a)
-    })()
+      console.log('--------------------')
+    }
+
+
+
+    {
+      // 将数组中所有数据的price属性的值，改为no属性相同的数据的price属性值的总和
+      let arr = [
+        {no: "AS6603", price: 13},
+        {no: "AS6605", price: 21},
+        {no: "AS6604", price: 18},
+        {no: "AS6602", price: 11},
+        {no: "AS6602", price: 22},
+        {no: "AS6602", price: 33},
+        {no: "AS6601", price: 12},
+        {no: "AS6600", price: 16},
+        {no: "AS6599", price: 50},
+        {no: "AS6599", price: 30},
+        {no: "AS6597", price: 99},
+        {no: "AS6596", price: 1},
+        {no: "AS6596", price: 2},
+        {no: "AS6596", price: 3},
+        {no: "AS6594", price: 77},
+      ]
+
+      function fn(arr) {
+        let newArr = arr.map(ele => {
+          let filterArr = arr.filter(item => item.no === ele.no)
+          if (filterArr.length > 1) {
+            ele.price = filterArr.reduce((prev,next) => prev + next.price, 0)
+            ele.price = filterArr[0].price
+          }
+        })
+        return newArr
+      }
+      fn(arr)
+      console.log(arr)
+      console.log('--------------------')
+    }
+
+    {
+      let arr = [
+        {no: "AS6603", price: 13},
+        {no: "AS6605", price: 21},
+        {no: "AS6604", price: 18},
+        {no: "AS6602", price: 11},
+        {no: "AS6602", price: 22},
+        {no: "AS6602", price: 33},
+        {no: "AS6601", price: 12},
+        {no: "AS6600", price: 16},
+        {no: "AS6599", price: 50},
+        {no: "AS6599", price: 30},
+        {no: "AS6597", price: 99},
+        {no: "AS6596", price: 1},
+        {no: "AS6596", price: 2},
+        {no: "AS6596", price: 3},
+        {no: "AS6594", price: 77},
+      ]
+      let arrNo = arr.map(item => item.no)
+      let arrPrice = []
+      for (var i = 0; i < arrNo.length; i++) {
+        let sum = 0
+        for (var j = 0; j < arr.length; j++) {
+          if(arrNo[i] == arr[j].no) {
+            sum += Number(arr[j].price)
+          }
+        }
+        rrPrice.push(sum)
+      }
+      console.log(arrPrice)
+    }
+
   </script>
 </body>
 </html>

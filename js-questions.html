@@ -376,6 +376,22 @@
         console.log(a123.prototype)
         console.log(abc123.prototype)
 
+        {
+            console.log('[]里写表达式')
+            let arr = [1,2,3]
+            let n = 0
+            console.log(arr[n = n + 1])
+        }
+
+        {
+            const add = function (x) {
+                return function(y) {
+                    return function(z) {
+                        return x + y + z
+                    }
+                }
+            }
+        }
 
         // 2019.10.17看到116
         // 55 类
@@ -387,6 +403,12 @@
         // 92 箭头函数
         // 96 类
         // 114 setInterval
+        // 119 ?
+        // 121 get set
+        // 124 *
+        // 126
+        // 127 
+        // 130 await promise
     </script>
 </body>
 

@@ -549,7 +549,21 @@
         // let reg = /^[0-9]\d*$/
         // console.log(reg.test(-1));
 
-
+        {
+            // add(1)(2)(3), 返回值是6，求函数怎么封装
+            const add = a => b => c => a + b + c
+            console.log(add(1)(2)(3))
+        }
+        {
+            // (5).add(5).minus(1), 返回值是6，求函数怎么封装
+            Number.prototype.add = function(a) {
+                return this + a
+            }
+            Number.prototype.minus = function(a) {
+                return this - a
+            }
+            console.log((5).add(5).minus(1))
+        }
         
     </script>
 </body>
