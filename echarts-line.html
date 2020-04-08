@@ -7,8 +7,8 @@
   <title>Document</title>
   <style>
     #chart {
-      width: 500px;
-      height: 300px;
+      width: 1000px;
+      height: 800px;
     }
   </style>
 </head>
@@ -17,20 +17,97 @@
   <div id="chart"></div>
   <script>
     let chart = echarts.init(document.getElementById('chart'))
-    let option = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line'
-      }]
+    // let option = {
+    //   xAxis: {
+    //     type: 'category',
+    //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    //   },
+    //   yAxis: {
+    //     type: 'value'
+    //   },
+    //   series: [{
+    //     data: [820, 932, 901, 934, 1290, 1330, 1320],
+    //     type: 'line'
+    //   }]
+    // }
+    // chart.setOption(option)
+
+
+// 环形嵌套---------------------
+    var data = [
+        {
+            name: "高中",
+            value: 0.3
+        },
+        {
+            name: "初中及以下",
+            value: 0.6
+        },
+        {
+            name: "其他",
+            value: 0.8
+        }
+    ]
+    var legendData = []
+    function getData(data) {
+        var res = [];
+        for (let i = 0; i < data.length; i++) {
+            legendData.push(data[i].name);
+            res.push({
+                type: 'pie',
+                // clockWise: false, //顺时加载
+                hoverAnimation: false, //鼠标移入变大
+                radius: [200 - i * 20, 220 - i * 20],
+                itemStyle: {
+                    normal: {
+                        label: {show:false},
+                        labelLine: {show:false}
+                    }
+                },
+                data: [
+                  {
+                    value: data[i].value,
+                    name: data[i].name
+                  }, {
+                    value: 1 - data[i].value,
+                    name:'invisible',
+                    itemStyle: {
+                        normal : {
+                            color: 'rgba(0,0,0,0)',
+                            label: {show:false},
+                            labelLine: {show:false}
+                        },
+                        emphasis : {
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    },
+                  }
+                ]
+            });
+        }
+        return res;
     }
+    option = {
+      backgroundColor: '#f4f2e3',
+        color: ['#85b6b2', '#6d4f8d','#cd5e7e', '#e38980','#f7db88'],
+        tooltip : {
+            show: true,
+            formatter: "{b} : {d}%"
+        },
+        // legend: {
+        //     data:legendData,
+        //     show: false
+        // },
+        // toolbox: {
+        //     show : true,
+        //     feature : {
+        //         saveAsImage : {show: true}
+        //     }
+        // },
+        series : getData(data)
+    };
     chart.setOption(option)
+//----------------------------------------
   </script>
 </body>
 </html>

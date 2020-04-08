@@ -5,13 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    .btn {
+      position: fixed;
+      left: 45vw;
+      top: 45vh;
+      width: 100px;
+      height: 100px;
+      background-color: #0a0;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
     <div class="box" @click="active = false">
         <button @click="btn">按钮</button>
         <div class="msg" ref="msgRef"></div>
-        
+
         <br>
 
         <button @click="addBox">增加</button>
@@ -31,6 +41,15 @@
           </li>
         </ul>
     </div>
+    <input type="text" v-model="watchVal">
+
+    <h3>-------- 改数组 --------</h3>
+    <div v-for="(item, index) in change">
+      <button @click.prevent.stop="changeArr(index)">button</button>
+      <div style="width:100px;height:100px;background:#a00" v-if="item.show"></div>
+    </div>
+    <h3>-------- 拖拽 --------</h3>
+    <div class="btn" @mousedown="drag"></div>
   </div>
   <script src="./vue.js"></script>
   <script>
@@ -42,11 +61,26 @@
           active: false,
           n: 1,
           d: this,
-          m: this.btn
+          m: this.btn,
+          watchVal: '',
+          change: [
+            {
+              show: true
+            },
+            {
+              show: true
+            }
+          ],
+          isDrag: false
         }
       },
       mounted() {
-        console.log(this.m)
+      },
+      watch: {
+        watchVal (newVal, oldVal) {
+          console.log(newVal, '新')
+          console.log(oldVal, '旧')
+        }
       },
       methods: {
         btn () {
@@ -65,6 +99,24 @@
         },
         turn() {
           this.n = 3
+        },
+        changeArr (i) {
+          this.$set(this.change[i], 'show', !this.change[i].show)
+        },
+        drag (e) {
+          let btn = document.querySelector('.btn')
+          // 鼠标坐标与按钮坐标的差值
+          let mToBtnX = e.clientX - btn.offsetLeft
+          let mToBtnY = e.clientY - btn.offsetTop
+          document.onmousemove = e => {
+            // 按钮的新坐标
+            btn.style.left = e.clientX - mToBtnX + 'px'
+            btn.style.top = e.clientY - mToBtnY + 'px'
+          }
+          document.onmouseup = () => {
+            document.onmousemove = null
+            document.onmouseup = null
+          }
         }
       }
     })

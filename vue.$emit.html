@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      #app {
+        width: 200px;
+        height: 200px;
+        background-color: #0aa;
+      }
+      .son {
+        width: 100px;
+        height: 100px;
+        background-color: #0a0;
+      }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+      <son @event="dadFn(arguments)"></son>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        const son = {
+          data () {
+            return {
+              num: 123,
+              msg: 'abc'
+            }
+          },
+          methods: {
+            sonFn () {
+              this.$emit('event', this.num, this.msg)
+            }
+          },
+          template: '<div class="son" @click="sonFn">子组件</div>'
+        }
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+              dadFn(arr) {
+                console.log(arr)
+              }
+            },
+            components: {
+              son
+            }
+        })
+    </script>
+</body>
+
+</html>

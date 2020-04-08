@@ -6,19 +6,102 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <link rel="stylesheet" href="./ele/theme-chalk/index.css">
+  <style>
+    /* el-table单选框 */
+    .el-radio__input {
+      padding-left: 8px;
+    }
+    .el-radio__label {
+      color: transparent;
+    }
+    .el-radio__input.is-checked+.el-radio__label {
+      color: transparent;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
-    <el-table :data="arr" border style="width: 20%">
-      <el-table-column
-        prop="name"
-        label="名称">
+    <h3>----- el-menu横向 -----</h3>
+    <el-menu mode="horizontal" background-color="rgba(0,0,0,0.7)">
+      <el-menu-item index="1">处理中心</el-menu-item>
+      <el-submenu index="2">
+        <template slot="title">我的工作台</template>
+        <el-menu-item index="2-1">选项1</el-menu-item>
+        <el-menu-item index="2-2">选项2</el-menu-item>
+        <el-menu-item index="2-3">选项3</el-menu-item>
+        <el-submenu index="2-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="2-4-1">选项1</el-menu-item>
+          <el-menu-item index="2-4-2">选项2</el-menu-item>
+          <el-menu-item index="2-4-3">选项3</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+    </el-menu>
+
+    <br />
+
+    <h3>----- el-container -----</h3>
+    <el-container>
+      <div style="background:#a0a">left</div>
+      <div style="background:#0aa">center</div>
+      <div style="background:#aa0">right</div>
+    </el-container>
+
+    <br />
+
+    <h3>----- el-table单选框 -----</h3>
+    <el-table
+      :data="tableData"
+      border>
+      <el-table-column width="50">
+        <template slot-scope="scope">
+          <el-radio
+            v-model="radioVal"
+            :label="scope.$index"
+            @change="radioChange">
+          </el-radio>
+          <!-- <input type="radio" name="radio" :value="scope.$index" @change="radioChange"> -->
+        </template>
       </el-table-column>
-      <el-table-column
-        prop="value"
-        label="值">
+      <el-table-column label="数据" prop="data">
       </el-table-column>
     </el-table>
+
+    <h3>----- el-button转圈圈 -----</h3>
+    <el-button type="primary" :loading="true" @click="loadClick">加载中</el-button>
+
+
+    <h3>----- el-form重置 -----</h3>
+    <el-table
+      :data="tableData"
+      border
+      @selection-change="select">
+      <el-table-column width="50" type="selection"></el-table-column>
+      <el-table-column label="数据" prop="data">
+      </el-table-column>
+    </el-table>
+    <br />
+    <el-button type="primary" @click.native="open(false)">新增</el-button>
+    <el-button @click.native="open(true)">修改</el-button>
+    <el-dialog
+      title="表单"
+      :visible.sync="dialogShow"
+      width="30%"
+      @closed="dialogClose">
+      <el-form
+        :model="form"
+        label-width="auto"
+        label-position="left"
+        ref="formRef"
+      >
+        <el-form-item label="Data" prop="data">
+          <el-input v-model="form.data"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer" style="text-align:right;">
+        <el-button type="primary" @click="dialogShow = false">关闭</el-button>
+      </div>
+    </el-dialog>
   </div>
   <script src="./vue.js"></script>
   <script src="./ele/index.js"></script>
@@ -26,55 +109,45 @@
     let vm = new Vue({
       el: '#app',
       data: {
-        arr: [
-          {name: 'a', value: 1},
-          {name: 'b', value: 2},
-          {name: 'c', value: 3},
-          {name: 'd', value: 4},
-          {name: 'e', value: 5},
-          {name: 'f', value: 6},
-          {name: 'g', value: 7},
-          {name: 'h', value: 8},
-          {name: 'i', value: 9},
-          {name: 'a', value: 1},
-          {name: 'b', value: 2},
-          {name: 'c', value: 3},
-          {name: 'd', value: 4},
-          {name: 'e', value: 5},
-          {name: 'f', value: 6},
-          {name: 'g', value: 7},
-          {name: 'h', value: 8},
-          {name: 'i', value: 9},
-          {name: 'a', value: 1},
-          {name: 'b', value: 2},
-          {name: 'c', value: 3},
-          {name: 'd', value: 4},
-          {name: 'e', value: 5},
-          {name: 'f', value: 6},
-          {name: 'g', value: 7},
-          {name: 'h', value: 8},
-          {name: 'i', value: 9},
-          {name: 'a', value: 1},
-          {name: 'b', value: 2},
-          {name: 'c', value: 3},
-          {name: 'd', value: 4},
-          {name: 'e', value: 5},
-          {name: 'f', value: 6},
-          {name: 'g', value: 7},
-          {name: 'h', value: 8},
-          {name: 'i', value: 9},
-          {name: 'a', value: 1},
-          {name: 'b', value: 2},
-          {name: 'c', value: 3},
-          {name: 'd', value: 4},
-          {name: 'e', value: 5},
-          {name: 'f', value: 6},
-          {name: 'g', value: 7},
-          {name: 'h', value: 8},
-          {name: 'i', value: 9},
-        ]
+        selectArr: [],
+        tableData: [
+          {data: 1},
+          {data: 2},
+          {data: 3},
+          {data: 4},
+        ],
+        radioVal: 1,
+        form: {
+          data: '',
+        },
+        dialogShow: false,
       },
+      methods: {
+        radioChange (val) {
+          console.log(val)
+        },
+        loadClick () {
+          console.log(123)
+        },
+        select (val) {
+          this.selectArr = val
+        },
+        open (bol) {
+          if (bol) {
+            this.dialogShow = true
+            this.$nextTick(() => {
+              this.form.data = this.selectArr[0].data
+            })
+          } else {
+            this.dialogShow = true
+          }
+        },
+        dialogClose () {
+          this.$refs.formRef.resetFields()
+        },
+      }
     })
+
   </script>
 </body>
 </html>

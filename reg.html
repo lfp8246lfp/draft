@@ -10,6 +10,14 @@
   <script>
     let reg = /^[1-9]\d*|0$/
     console.log(reg.test(123))
+
+    {
+      let str = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+      let str1 = str.replace(/[xy]/g, c => {
+        return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)
+      })
+      console.log(str1)
+    }
   </script>
 </body>
 </html>
