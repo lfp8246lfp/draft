@@ -73,8 +73,78 @@
       console.error('error')
       console.info('info')
       console.warn('warn')
+
+      console.log('%c呵呵呵', 'color:#0a0;font-size:30px')
+
+      let arr = [
+        {a: 1, b: 2, c: 3},
+        {a: 11, b: 22, c: 33}
+      ]
+      console.table(arr)
     }
 
+    {
+      let json = {
+        'a': [{'b': 'c'}, 'd'],
+        'x': 1,
+        'y': {'z': 0}
+      }
+
+      let get = (obj, key) => {}
+      console.log(get(json, 'y.z'), 'get')
+      console.log(get(json, 'a[0].b'), 'get')
+    }
+
+
+    {
+      let a = '5'
+      let b = '45'
+      console.log(a.localeCompare(b))
+    }
+
+    {
+      console.log([].map(ele => ele.a))
+    }
+
+    {
+      let rate = 5
+      let starts = "★★★★★☆☆☆☆☆".slice(5 - rate, 10 - rate)
+      console.log(starts)
+    }
+
+    {
+      let k = 0;
+      for(let i=0, j=0; i<1, j<3; i++, j++){
+          k = i + j;
+      }
+      console.log(k)
+      // 4 (2+2)
+    }
+
+    {
+      let obj = {
+        a: 1
+      }
+      console.log(obj .a)
+
+      console.log(2..toString())
+    }
+
+    {
+      let arr = [1, 2, 3]
+      let n = arr.find(ele => ele > 1 && ele < 3 && typeof ele === 'number')
+      console.log(n)
+    }
+
+    {
+      let arr = [{a:3}, {a:1}, {a:2}, {a:0}]
+      arr = arr.sort((a, b) => a.a - b.a)
+      console.log(arr)
+    }
+
+    {
+      console.log('' < 1);
+    }
   </script>
 </body>
 </html>

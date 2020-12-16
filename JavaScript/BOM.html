@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .body {
+      background-color: #0aa;
+    }
+  </style>
+</head>
+<body>
+  <div class="body">
+    <div class="box"></div>
+  </div>
+  <script>
+    //不会报错，因为这是对window的一次属性查询
+    // let a = window.a;
+
+    {
+      const a = 1;
+      window.b = 2;
+      delete window.a; // false 删除无效
+      delete window.b; // true 删除成功
+    }
+
+    console.log(window.screenLeft, '浏览器窗口相对屏幕left');
+    console.log(window.screenX, '浏览器窗口相对屏幕left');
+    console.log(window.screenTop, '浏览器窗口相对屏幕top');
+    console.log(window.screenY, '浏览器窗口相对屏幕top');
+
+    // window.moveTo(0, 0); // 无效
+    // window.moveBy(100, 100); // 无效
+
+
+    console.log(window.outerWidth, 'outerWidth');
+    console.log(window.outerHeight, 'outerHeight');
+    console.log('-------------------------------')
+    console.log(window.innerWidth, 'innerWidth');
+    console.log(window.innerHeight, 'innerHeight');
+    let docWidth = document.documentElement.clientWidth;
+    let docHeight = document.documentElement.clientHeight;
+    console.log(docWidth, 'docWidth');
+    console.log(docHeight, 'docHeight');
+
+    let bodyBox = document.querySelector('.body');
+    bodyBox.style.width = window.innerWidth + 'px';
+    bodyBox.style.height = window.innerHeight + 'px';
+
+    // window.resizeTo(100, 100); // 无效
+    // window.resizeBy(100, 100); // 无效
+
+    // window.open('https://www.baidu.com/')
+
+    // let result = prompt('请输入', '你好');
+    // console.log(result);
+
+    console.log('--------------------------------')
+
+    const {
+      userAgent,
+      language,
+      cookieEnabled,
+      mimeTypes,
+      plugins,
+      onLine,
+      vendor,
+    } = navigator;
+    console.log(userAgent, '---userAgent');
+    console.log(language, '---language');
+    console.log(cookieEnabled, '---cookieEnabled');
+    console.log(mimeTypes, '---mimeTypes');
+    console.log(plugins, '---plugins');
+    console.log(onLine, '---onLine');
+    console.log(vendor, '---vendor');
+
+    // history.back()
+    // history.forward()
+    console.log(history.length, '历史记录的数量');
+  </script>
+</body>
+</html>

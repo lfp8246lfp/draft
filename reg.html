@@ -8,15 +8,39 @@
 </head>
 <body>
   <script>
-    let reg = /^[1-9]\d*|0$/
-    console.log(reg.test(123))
-
+    {
+      let reg = /^[1-9]\d*|0$/
+      console.log(reg.test(123))
+    }
+console.log('--------------------------------------------')
     {
       let str = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
       let str1 = str.replace(/[xy]/g, c => {
         return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)
       })
       console.log(str1)
+    }
+console.log('--------------------------------------------')
+    {
+      console.log('[123]'.split('[').join('').split(']').join(''))
+    }
+
+    {
+      let reg = /e/g
+      console.log(reg.exec("hello"));
+    }
+console.log('--------------------------------------------')
+    {
+      let reg1 = /.at/;
+      let str1 = 'bat,cat,aat';
+      console.log(reg1.exec(str1)); // ["bat", index: 0, input: "bat,cat,aat"]
+      console.log(reg1.exec(str1)); // ["bat", index: 0, input: "bat,cat,aat"]
+      console.log(reg1.exec(str1)); // ["bat", index: 0, input: "bat,cat,aat"]
+      let reg2 = /.at/g;
+      let str2 = 'bat,cat,aat';
+      console.log(reg2.exec(str2)); // ["bat", index: 0, input: "bat,cat,aat"]
+      console.log(reg2.exec(str2)); // ["cat", index: 4, input: "bat,cat,aat"]
+      console.log(reg2.exec(str2)); // ["aat", index: 11, input: "bat,cat,aat"]
     }
   </script>
 </body>

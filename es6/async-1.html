@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      async function fn () {
+        return 1;
+      }
+      const result = fn();
+      result.then(res => {
+        console.log(res); // 1
+      })
+      console.log(result);
+      // Promise对象
+      // [[PromiseState]]: "fulfilled"
+      // [[PromiseResult]]: 1
+    }
+    {
+      async function fn () {
+        throw 1;
+      }
+      const result = fn();
+      result.catch(err => {
+        console.log(err); // 1
+      })
+      console.log(result);
+      // Promise对象
+      // [[PromiseState]]: "rejected"
+      // [[PromiseResult]]: 1
+    }
+
+    {
+      function fn () {
+        return new Promise((res, rej) => {
+          setTimeout(() => {
+            const num = Math.floor(Math.random() * 10 + 1);
+            if (num > 5) {
+              res({value: num, status: 'resolved'});
+            } else {
+              rej({value: num,status: 'rejected'});
+            }
+          }, 0);
+        })
+      }
+      async function fun () {
+        try {
+          const result = await fn();
+          console.log(result);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      fun();
+    }
+
+    {
+      async function fn () {
+        await new Promise((res, rej) => rej('error'))
+        .catch(err => console.log(err));
+      }
+      fn();
+    }
+
+    {
+      async function fn () {
+        await new Promise((res, rej) => rej('error'))
+      }
+      fn().catch(err => {
+        console.log(err);
+      })
+    }
+
+    {
+      async function fn () {
+        try {
+          await new Promise((res, rej) => res('res'));
+          await new Promise((res, rej) => rej('error2'));
+          await new Promise((res, rej) => rej('error3'));
+        } catch (err) {
+          console.log(err); // error2
+        }
+      }
+      fn();
+    }
+
+  </script>
+</body>
+</html>

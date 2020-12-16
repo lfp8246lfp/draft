@@ -12,6 +12,54 @@
       let blob = new Blob(['123', '456'], {type: 'application/vnd.ms-excel'})
       href = URL.createObjectURL(blob)
       window.location.href = href
+
+      let data = {
+        "beginAt":"2019-9-01 9:2:54",
+        "endAt":"2019-10-1 9:2:54",
+        "pageNum":"1",
+        "pageSize":"10",
+        "fileType":"1",
+        "replace":{
+          "detailtype":{
+            "2":"充电桩收益",
+            "3":"wifi表收益"
+          }
+        },
+        "list":[
+          {"property":"chatname","propertyValue":"微信名称"},
+          {"property":"transactionsvalue","propertyValue":"金额"},
+          {"property":"detailtype","propertyValue":"流水类型"},
+          {"property":"transactionsdate","propertyValue":"时间"}
+        ]
+      }
+
+    // axios.interceptors.request.use(function(config) {
+    //   config.headers['HTTP_ACCESS_TOKEN'] = '96a4058f3215e4aed999277385916640'
+    //   return config
+    // }, function(error) {
+    //   console.log(error)
+    // })
+
+    axios({
+      method: 'post',
+      url: 'http://192.168.0.18:8004/service/download/analysisservice/PropertyIndexService/exprotRevenueStatistics',
+      responseType: 'blob',
+      headers: {'HTTP_ACCESS_TOKEN': 'b24e0e621a6fc961d13345007f407eb8'},
+      data
+    }).then(res => {
+      console.log(res)
+      // let blob = new Blob([res.data], {type: "application/vnd.ms-excel"})
+      // let url = window.URL.createObjectURL(blob)
+      // window.location.href = url
+        let blob = new Blob([res.data], {type: 'application/vnd.ms-excel'})
+        const link = document.createElement('a')
+        link.style.display = 'none'
+        link.href = URL.createObjectURL(blob)
+        link.setAttribute('download', 'hhh.xlsx')
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    })
   </script>
 </body>
 </html>

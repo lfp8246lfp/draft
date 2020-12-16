@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      class Person {
+        constructor (name) {
+          this.name = name;
+        }
+        sayName () {
+          console.log(this.name);
+        }
+      }
+      const p = new Person('bob');
+      p.sayName(); // bob
+      console.log(p instanceof Person); // true
+      console.log(p.constructor === Person); // true
+      console.log(Person.prototype.constructor === Person); // true
+      console.log(p.__proto__ === Person.prototype); // true
+      console.log(Person.prototype.isPrototypeOf(p)); // true
+      console.log(Object.getPrototypeOf(p) === Person.prototype); // true
+
+      Object.assign(Person.prototype, {
+        sayHello () {
+          console.log('Hello');
+        }
+      })
+      p.sayHello(); // Hello
+
+      console.log(p); // class上的方法不能枚举
+      for (const key in p) {
+        console.log(key);
+      }
+
+      console.log(p.hasOwnProperty('name')); // true
+      console.log(p.hasOwnProperty('sayName')); // false
+    }
+    console.log('----------------------------------')
+    {
+      // setter getter
+      class Person {
+        constructor (name) {
+          this.name = name;
+        }
+        get age () {
+          return 18;
+        }
+        set age (val) {
+          return 18;
+        }
+      }
+      const p = new Person('amy');
+      console.log(p.age);
+      p.age = 19;
+      console.log(p.age);
+    }
+    console.log('----------------------------------')
+    {
+      class Person {
+        sex = 'male';
+        major = 'english';
+        constructor (name) {}
+      }
+      const p = new Person();
+      console.log(p.sex); // male
+      console.log(p.major); // english
+    }
+    console.log('----------------------------------')
+    {
+      class Person {
+        constructor (name) {}
+        static say () {
+          console.log(666);
+        }
+        static sex = 'male';
+      }
+      const p = new Person();
+      Person.say();
+      console.log(Person.sex); // 静态属性似乎可以用
+    }
+  </script>
+</body>
+</html>

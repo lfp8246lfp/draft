@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      async function fn () {
+        let index;
+        let num;
+        for (index = 0; index < 5; index++) {
+          try {
+            await new Promise((res, rej) => {
+              setTimeout(() => {
+                num = Math.floor(Math.random() * 10 + 1);
+                num > 5 ? res({num, index}) : rej({num, index});
+              }, 0);
+            })
+            break;  // 返回resolved则退出循环
+          } catch (err) {
+            console.log(err);
+          }
+        }
+        console.log(index, num);
+      }
+      // fn();
+    }
+
+    {
+      async function fn () {
+        let result = null;
+        await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const num = Math.floor(Math.random() * 10 + 1);
+            num > 5 ? resolve({num, status: 'resolved'}) : reject({num, status: 'rejected'});
+          }, 0);
+        })
+        .then(res => {
+          result = res;
+        })
+        .catch(err => {
+          result = err;
+        })
+        console.log(result, 'result');
+      }
+      // fn();
+    }
+    {
+      async function fn () {
+        let result = null;
+        try {
+          result = await new Promise((resolve, reject) => {
+            setTimeout(() => {
+              const num = Math.floor(Math.random() * 10 + 1);
+              num > 5 ? resolve({num, status: 'resolved'}) : reject({num, status: 'rejected'});
+            }, 0);
+          })
+        } catch (err) {
+          result = err;
+        }
+        console.log(result, 'result');
+      }
+      // fn();
+    }
+
+    {
+      function fn () {
+        const arr = [1, 2, 3];
+        arr.forEach(async num => {
+          await new Promise((resolve, reject) => {
+            setTimeout(() => {
+              num > 2 ? resolve({num, status: 'resolved'}) : reject({num, status: 'rejected'});
+            }, 0);
+          })
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
+        })
+      }
+      fn();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.bj {
+			position: absolute;
+			left: 100px;
+      top: 100px;
+			width: 8px;
+			height: 8px;
+		}
+		.pulse1,
+		.pulse2,
+		.pulse3 {
+			position: absolute;
+			left: 0;
+			top: 0;
+			transform: translate(-50%, -50%);
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			box-shadow: inset 0 0 10px #f00;
+			animation: pulse 1.2s linear infinite;
+		}
+		.pulse2 {
+			animation-delay: .4s
+		}
+		.pulse3 {
+			animation-delay: .8s
+		}
+		@keyframes pulse {
+			0% {}
+			70% {
+				width: 40px;
+				height: 40px;
+				opacity: 1;
+			}
+			100% {
+				width: 100px;
+				height: 100px;
+				opacity: 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="bj">
+			<div class="pulse1"></div>
+			<div class="pulse2"></div>
+			<div class="pulse3"></div>
+		</div>
+	</div>
+</body>
+</html>

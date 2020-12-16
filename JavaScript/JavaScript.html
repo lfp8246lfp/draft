@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      console.log(2.5e2) // 250
+      console.log(Number(true)) // 1
+      console.log(Number('0x10')) // 16
+      console.log(parseInt('0x10')) // 16
+      console.log(parseInt('010')) // 10
+      console.log(parseInt('010', 8)) // 8
+    }
+
+    {
+      let a = 4
+      switch (a) {
+        case 2:
+          console.log('小于3')
+          break;
+        case 3:
+          console.log(3)
+          break
+        default:
+          console.log('其他')
+      }
+    }
+
+    {
+      let obj = {
+        0: 1,
+        1: 2,
+        length: 2
+      }
+      console.log(Array.from(obj)) // [1, 2]
+    }
+console.log('-------------------------------------------')
+    {
+      let date = new Date()
+      console.log(date.toDateString()) // Mon Nov 23 2020
+      console.log(date.toTimeString()) // 17:22:03 GMT+0800 (中国标准时间)
+      console.log(date.toLocaleDateString()) // 2020/11/23
+      console.log(date.toLocaleTimeString()) // 下午5:22:03
+      console.log(date.toUTCString()) // Mon, 23 Nov 2020 10:50:08 GMT
+    }
+
+    {
+      'use strict';
+      var fn = function (num) {
+        if (num <= 1) return 1
+        else return num * arguments.callee(num - 1)
+      }
+      console.log(fn(3))
+    }
+
+    {
+      var num1 = 1.01
+      var num2 = 1.05
+      console.log(num1.toFixed(1))
+      console.log(num2.toFixed(1))
+    }
+
+    {
+      let text = "cat, bat, sat, fat";
+      let pattern = /.at/;
+      let matches = text.match(pattern);
+      console.log(matches)
+    }
+
+    {
+      // 闭包
+      function fn (prop) {
+        return function (obj1, obj2) {
+          return obj1[prop] + obj2[prop];
+        };
+      }
+      let f = fn('a');
+      f({a: 1}, {a: 2}) // 3
+      f = null; // 销毁闭包
+    }
+
+    {
+      function createFunctions(){
+        var result = new Array();
+        for (var i=0; i < 10; i++){
+          result[i] = function(){
+            return i;
+          };
+        }
+        return result;
+      }
+      let array = createFunctions();
+      for (var index = 0; index < array.length; index++) {
+        console.log(array[index]()); // 10
+      }
+    }
+
+    {
+      var name = "The Window";
+      var object = {
+        name : "My Object",
+        getNameFunc : function () {
+          var that = this; // 把 this对象赋值给that
+          return function () {
+            console.log(this.name); //"The Window"
+            console.log(that.name); //"My Object"
+          };
+        }
+      };
+      object.getNameFunc()();
+    }
+
+  </script>
+</body>
+</html>

@@ -271,13 +271,24 @@
         // console.log(fn(arr1, arr2));
 
 
-        // let num = 1234
-        // let str = num.toLocaleString()
-        // console.log(str);
-
-
-        // console.log(new Date().toLocaleString());
-        // console.log(new Date().toString());
+let num = 1234
+console.log(num.toLocaleString())
+// 1,234
+console.log(new Date().toString())
+// Mon Oct 19 2020 10:20:41 GMT+0800 (中国标准时间)
+console.log(new Date().toLocaleString())
+// 2020/10/19 上午10:20:41
+console.log({a: 1}.toString())
+// [object Object]
+console.log({a: 1}.toLocaleString())
+// [object Object]
+console.log([1, 2].toString())
+console.log([1, 2].toLocaleString())
+function fn () {
+    return 123
+}
+console.log(fn.toString())
+console.log(fn.toLocaleString())
 
 
 
@@ -369,11 +380,6 @@
         // }
         // arg(1, 2)
 
-
-        // let arr = [1, 2, 3]
-
-        // console.log(arr.toLocaleString());
-        // console.log(arr.toString());
 
 
         // console.log(typeof true.toString());

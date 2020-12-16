@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TG</title>
+  <style>
+    #bottle {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #0aa;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    #water {
+      height: 0%;
+      background-color: #0aa;
+      transition: all 1s;
+      /* animation: upDown 10s linear infinite; */
+    }
+    /* @keyframes upDown {
+			0% {}
+      10% {
+        height: 50%;
+      }
+			50% {
+        height: 50%;
+      }
+      60% {
+        height: 0%;
+      }
+		} */
+    .count {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      font-style: normal;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div id="bottle">
+    <div id="water"></div>
+    <i class="count">0</i>
+  </div>
+  <script>
+    const bottle = document.querySelector('#bottle');
+    const water = document.querySelector('#water');
+    const i = document.querySelector('.count');
+    let count = 2;
+    let range = 5000;
+    let circle = 9000;
+    let interval = null;
+    let round = 1
+    getCount();
+    start();
+    async function start () {
+      await up();
+      run();
+    };
+    function run () {
+      // if (round === 1) {
+      //   circle = 9000;
+      // } else if (round === 2) {
+      //   circle = 14000;
+      // } else if (round === 3) {
+      //   circle = 64000;
+      // }
+      interval = setInterval(async() => {
+        if (count < 1) {
+          clearInterval(interval);
+          interval = null;
+        }
+        await up();
+      }, circle);
+    };
+    function up () {
+      setTimeout(() => {
+        water.style.height = '50%';
+        getCount();
+        down();
+        --count;
+      }, 1000);
+    };
+    function down () {
+      // if (round === 1) {
+      //   range = 5000;
+      // } else if (round === 2) {
+      //   range = 10000;
+      // } else if (round === 3) {
+      //   range = 60000;
+      // }
+      setTimeout(() => {
+        water.style.height = '0%';
+      }, range);
+    };
+    function getCount () {
+      // if (count < 0) {
+      //   ++round;
+      //   if (round === 2) {
+      //     count = 10;
+      //   } else if (round === 3) {
+      //     count = 5;
+      //   }
+      // }
+      i.innerHTML = count;
+    };
+  </script>
+</body>
+</html>

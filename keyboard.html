@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    .ball {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      background-color: #a0a;
+      border-radius: 50%;
+      transition: all 0.1s linear 0s;
+    }
+  </style>
+</head>
+<body>
+  <div class="ball"></div>
+  <script>
+    //w 87
+    //s 83
+    //a 65
+    //d 68
+    const ball = document.querySelector('.ball')
+    let step = 10
+    document.onkeydown = function (e) {
+      // let timer = ''
+      if (e.keyCode == 87) {
+        // clearInterval(timer)
+        // timer = ''
+        if (ball.offsetTop <= 0) {
+          ball.style.top = 0
+        } else {
+          ball.style.top = ball.offsetTop - step + 'px'
+          // timer = setInterval(() => {
+          //   ball.style.top = ball.offsetTop - step + 'px'
+          // }, 100)
+        }
+      } else if (e.keyCode == 83) {
+        // clearInterval(timer)
+        // timer = ''
+        if (ball.offsetTop >= (window.innerHeight - 100)) {
+          ball.style.top = window.innerHeight - 100 + 'px'
+        } else {
+          ball.style.top = ball.offsetTop + step + 'px'
+          // timer = setInterval(() => {
+          //   ball.style.top = ball.offsetTop + step + 'px'
+          // }, 100)
+        }
+      } else if (e.keyCode == 65) {
+        // clearInterval(timer)
+        // timer = ''
+        if (ball.offsetLeft <= 0) {
+          ball.style.left = 0
+        } else {
+          ball.style.left = ball.offsetLeft - step + 'px'
+          // timer = setInterval(() => {
+          //   ball.style.left = ball.offsetLeft - step + 'px'
+          // }, 100)
+        }
+      } else if (e.keyCode == 68) {
+        // clearInterval(timer)
+        // timer = ''
+        if (ball.offsetLeft >= (window.innerWidth - 100)) {
+          ball.style.left = window.innerWidth - 100 + 'px'
+        } else {
+          ball.style.left = ball.offsetLeft + step + 'px'
+          // timer = setInterval(() => {
+          //   ball.style.left = ball.offsetLeft + step + 'px'
+          // }, 100)
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      let obj = {a: 1}
+      Object.defineProperty(obj, 'a', {
+        value: 2
+      })
+      console.log(obj)
+      console.log(Object.keys(obj))
+
+      console.log(obj.valueOf() === obj)
+    }
+
+    ;(function fn() {
+      console.log('--------------------')
+      console.log(0 in [1,2])
+      console.log(2 in [1,2])
+      console.log('a' in {a:1, b:2})
+      console.log(1 in {a:1, b:2})
+    })()
+
+
+    {
+      var book = {
+        _year: 2004,
+        edition: 1
+      };
+      Object.defineProperty(book, "year", {
+        get: function(){
+          return this._year;
+        },
+        set: function(newValue){
+          if (newValue > 2004) {
+            this._year = newValue;
+            this.edition += newValue - 2004;
+          }
+        }
+      });
+      book.year = 2005;
+      console.log(book._year); //2
+      console.log(book.edition); //2
+    }
+
+    {
+      // Object.defineProperties
+      let obj = {
+        prop: 0
+      };
+      Object.defineProperties(obj, {
+        prop1: {
+          enumerable: true,
+          value: 1,
+        },
+        prop2: {
+          configurable: true,
+          value: 2,
+        },
+        prop3: {
+          writable: true,
+          value: 3,
+        },
+        prop4: {
+          set (newVal) {
+            this.prop = newVal * 2;
+          },
+          get () {
+            return this.prop;
+          },
+        }
+      });
+      obj.prop1 = 0;
+      delete obj.prop2;
+      for (const k in obj) {
+        console.log(k); // prop1
+      }
+      console.log(obj.prop4); // 0
+      obj.prop4 = 10;
+      console.log(obj); // {prop: 20, prop1: 1, prop3: 3}
+
+      // Object.getOwnPropertyDescriptor()
+      let descriptor1 = Object.getOwnPropertyDescriptor(obj, 'prop1');
+      let descriptor2 = Object.getOwnPropertyDescriptor(obj, 'prop2');
+      let descriptor3 = Object.getOwnPropertyDescriptor(obj, 'prop3');
+      let descriptor4 = Object.getOwnPropertyDescriptor(obj, 'prop4');
+      console.log(descriptor1); // {value: 1, writable: false, enumerable: true, configurable: false}
+      console.log(descriptor2); // undefined
+      console.log(descriptor3); // {value: 3, writable: true, enumerable: false, configurable: false}
+      console.log(descriptor4); // {enumerable: false, configurable: false, get: ƒ, set: ƒ}
+    }
+
+    {
+      const obj = {};
+      obj.constructor === Object // true
+      obj instanceof Object // true
+
+      const object = new Object();
+      object.constructor === Object // true
+      object instanceof Object // true
+
+      function Person (name) {
+        this.name = name;
+        this.sayName = function () {
+          console.log(this.name);
+        }
+      }
+      const p = new Person('abc');
+      p.constructor === Person // true
+      p instanceof Object // true
+
+      //*******************************
+      p.sayName(); // 'abc'
+      const name = 'aaa';
+      p.sayName.call(window); // 'aaa'
+
+      //*******************************
+      console.log(Person.prototype.constructor === Person) // true
+      console.log(p.__proto__ === Person.prototype) // true
+      console.log(Person.prototype.isPrototypeOf(p))
+
+      //*******************************
+      Person.prototype.age = 18;
+      const p1 = new Person('cc');
+      console.log(p1.age); // 18
+
+      console.log(Object.getPrototypeOf(p) === Person.prototype);
+
+      //*******************************
+      p1.age = 20; // 修改原型上的属性
+      console.log(p1.age); // 20
+      delete p1.age;
+      console.log(p1.age); // 18
+    }
+
+    {
+      function Person () {}
+      Person.prototype.name = 'LiHua';
+      Person.prototype.sex = 'boy';
+      Person.prototype.nation = 'China';
+      const person = new Person();
+      person.age = 18;
+      person.sex = 'girl';
+      console.log(person.hasOwnProperty('name')); // false
+      console.log(person.hasOwnProperty('nation')); // false
+      console.log(person.hasOwnProperty('sex')); // true
+      console.log(person.hasOwnProperty('age')); // true
+
+      //*******************************
+      for (const key in person) {
+        console.log(key) // age, sex, name, nation
+        if (person.hasOwnProperty(key)) {
+          console.log(key) // age, sex
+        }
+      }
+      //*******************************
+      Object.defineProperty(person, 'prop', {
+        enumerable: false,
+        value: 1
+      })
+      console.log(Object.keys(person)) // ['age', 'sex']
+      console.log(Object.getOwnPropertyNames(person)) // ['age', 'sex', 'prop']
+    }
+
+    {
+      function Person () {};
+      Person.prototype = {
+        name: 'amy',
+        age: 18,
+        say: function () {
+          console.log('Hello')
+        }
+      }
+      console.log(Person.prototype.constructor === Object); // true
+      console.log(Person.prototype.constructor === Person); // false
+
+      Person.prototype.constructor = Person
+      console.log(Person.prototype.constructor === Object); // false
+      console.log(Person.prototype.constructor === Person); // true
+      const person = new Person();
+      console.log(Object.keys(Person.prototype)); // ["name", "age", "say", "constructor"]
+
+      Object.defineProperty(Person.prototype, 'constructor', {
+        value: Person,
+        enumerable: false
+      })
+      console.log(Object.keys(Person.prototype)); // ["name", "age", "say"]
+    }
+
+    {
+      function Person () {
+        this.name = 'amy';
+        this.age = 18;
+      };
+      const person = new Person();
+      console.log(person);
+      Person.prototype.sex = 'male'; // 创建实例后再在原型上添加新属性
+      console.log(person.sex); // 'male'
+
+      Person.prototype.arr = [1, 2]; // 在原型上加引用类型
+      const p1 = new Person();
+      const p2 = new Person();
+      p1.arr[2] = 3;
+      console.log(p2.arr); // [1, 2, 3]
+    }
+
+    {
+      // 组合使用构造函数模式和原型模式
+      function Person (name, age) {
+        this.name = name;
+        this.age = age;
+        this.friends = ['小夫', '胖虎'];
+      }
+      Person.prototype = {
+        sex: 'male',
+        say () {
+          console.log('hello');
+        }
+      }
+      const p1 = new Person('大雄');
+      const p2 = new Person('哆啦A梦');
+      p1.friends.push('静香');
+      p1.friends // ["小夫", "胖虎", "静香"]
+      p2.friends // ["小夫", "胖虎"]
+      p1.friends === p2.friends // false
+      p1.say === p2.say //true
+    }
+
+    {
+      // 动态原型模式
+      function Person(name, age, job){
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        if (typeof this.sayName != "function"){
+          console.log(this.sayName);
+          Person.prototype.sayName = function(){
+            console.log(this.name);
+          };
+        }
+      }
+      var friend = new Person("Nicholas", 29, "Software Engineer");
+      friend.sayName();
+    }
+
+    {
+      // 工厂模式
+      function createPerson(name, age, job){
+        var o = new Object();
+        o.name = name;
+        o.age = age;
+        o.job = job;
+        o.sayName = function(){
+          console.log(this.name);
+        };
+        return o;
+      }
+      var p = createPerson("Nicholas", 29, "Software Engineer");
+      console.log(p.sayName() === p)
+    }
+
+    {
+      // 原型链继承
+      function Dad () {
+        this.money = 100;
+        this.interests = ['eat', 'sleep', 'play'];
+      }
+      function Child () {}
+      Child.prototype = new Dad();
+      const boy = new Child();
+      console.log(boy.money); // 100
+
+      console.log(boy.constructor === Dad); // true
+
+      console.log(boy instanceof Dad); // true
+      console.log(boy instanceof Child); // true
+      console.log(boy instanceof Object); // true
+
+      // 原型链继承的缺点
+      const girl = new Child();
+      girl.interests.push('makeup');
+      console.log(girl.interests); // ['eat', 'sleep', 'play', 'makeup']
+      console.log(boy.interests); // ['eat', 'sleep', 'play', 'makeup']
+    }
+
+    {
+      // 借用构造函数
+      function Dad (name) {
+        this.name = name;
+        this.skills = ['工作', '唱歌', '踢球'];
+      }
+      Dad.prototype.sayName = function () {
+        console.log(this.name);
+      }
+      function Child () {
+        Dad.call(this, '狗子');
+      }
+      const boy = new Child();
+      const girl = new Child();
+      girl.skills.push('跳舞');
+      console.log(boy.skills); // ['工作', '唱歌', '踢球']
+      console.log(girl.skills); // ['工作', '唱歌', '踢球', '跳舞']
+      console.log(boy.name); // '狗子'
+      // boy.sayName(); // 报错
+      // 父构造函数的原型里的方法，子实例是不能调用的
+      // 所以函数只能写在父构造函数里，失去复用性
+    }
+
+    {
+      // 组合继承
+      function Dad (name) {
+        this.name = name;
+        this.skills = ['工作', '唱歌', '踢球'];
+      }
+      Dad.prototype.sayName = function () {
+        return this.name;
+      }
+      function Child (name, age) { // 借用构造模式的优点1：传参
+        Dad.call(this, name);
+        this.age = age;
+      }
+      Child.prototype = new Dad();
+      Child.prototype.constructor = Child;
+      Child.prototype.sayAge = function () {
+        return this.age;
+      }
+      const boy = new Child('儿子', 18);
+      const girl = new Child('女儿', 15);
+      // 借用构造模式的优点2：引用类型属性不共用
+      boy.skills.push('吹牛');
+      boy.skills // ["工作", "唱歌", "踢球", "吹牛"]
+      girl.skills // ["工作", "唱歌", "踢球"]
+      boy.sayName(); // '儿子'
+      girl.sayName(); // '女儿'
+      boy.sayAge(); // 18
+      girl.sayAge(); // 15
+    }
+
+
+    {
+      // 组合继承
+      function Father (name) {
+        this.name = name;
+        this.interests = ['sing', 'dance'];
+      }
+      Father.prototype.say = function () { // 方法写在父原型里
+        return this.name;
+      }
+      function Child (name, sex) {
+        Father.call(this, name); // 借用构造函数
+        this.sex = sex;
+      }
+      Child.prototype = new Father(); // 原型链继承
+      Child.prototype.constructor = Child;
+      const boy = new Child('bob', 'male');
+      const girl = new Child('amy', 'female');
+      girl.interests.push('makeup');
+      console.log(girl.interests); // ["sing", "dance", "makeup"]
+      console.log(boy.interests); // ["sing", "dance"]
+      console.log(girl.say()); // "amy"
+      console.log(boy.say()); // "bob"
+
+      console.log(boy);
+      for (const key in boy) { // prototype上的属性都是可枚举的
+        console.log(key);
+      }
+    }
+
+  </script>
+</body>
+</html>

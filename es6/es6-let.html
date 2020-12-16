@@ -48,6 +48,47 @@
   ({a} = {a: 1})
   console.log(a)
 }
+
+
+{
+  // 完全冻结对象的方法
+  function freeze(obj) {
+    Object.freeze(obj)
+    for (const ele of Object.keys(obj)) {
+      if (typeof obj[ele] === 'object') {
+        freeze(obj[ele])
+      }
+    }
+  }
+  const obj = {a: {b: {c: 1}}}
+  freeze(obj)
+  obj.aa = 1
+  obj.a.bb = 1
+  obj.a.b.cc = 2
+  console.log(obj)
+}
+
+
+{
+  console.log('---------------')
+  let obj = {}
+  let arr = [];
+  ({ a: obj.prop, b: arr[0] } = { a: 123, b: true })
+  console.log(obj) // {prop:123}
+  console.log(arr) // [true]
+}
+
+
+{
+  console.log('-------------')
+  let str = '  asd  '
+  console.log(str.trimStart())
+  console.log(str.trimEnd())
+  console.log(str.trimLeft())
+  console.log(str.trimRight())
+}
+
+
   </script>
 </body>
 </html>

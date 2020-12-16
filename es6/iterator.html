@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <script>
+    {
+      const arr = [1, 2, 3];
+      const iterator = arr[Symbol.iterator]();
+      console.log(iterator.next()); // {value: 1, done: false}
+      console.log(iterator.next()); // {value: 2, done: false}
+      console.log(iterator.next()); // {value: 3, done: false}
+      console.log(iterator.next()); // {value: undefined, done: true}
+    }
+    console.log('---------------------------------------')
+    {
+      const map = new Map();
+      map.set({}, 0);
+      map.set([1], 1);
+      const iterator = map[Symbol.iterator]();
+      console.log(iterator.next()); // {value: [{}, 0], done: false}
+      console.log(iterator.next()); // {value: [[1], 1], done: false}
+      console.log(iterator.next()); // {value: undefined, done: true}
+    }
+    console.log('---------------------------------------')
+    {
+      const str = 'abc';
+      const iterator = str[Symbol.iterator]();
+      console.log(iterator.next()); // {value: 'a', done: false}
+      console.log(iterator.next()); // {value: 'b', done: false}
+      console.log(iterator.next()); // {value: 'c', done: false}
+      console.log(iterator.next()); // {value: undefined, done: true}
+    }
+    console.log('---------------------------------------')
+    {
+      function fn () {
+        const iterator = arguments[Symbol.iterator]();
+        for (let index = 0; index < arguments.length + 1; index++) {
+          console.log(iterator.next())
+        }
+      }
+      fn(1, 2, 3);
+      // {value: 1, done: false}
+      // {value: 2, done: false}
+      // {value: 3, done: false}
+      // {value: undefined, done: true}
+    }
+    console.log('---------------------------------------')
+    {
+      const lis = document.querySelectorAll('li');
+      const iterator = lis[Symbol.iterator]();
+      let result = iterator.next();
+      while (!result.done) {
+        console.log(result.value);
+        result = iterator.next();
+      }
+      // console.log(iterator.next()); // {value: li, done: false}
+      // console.log(iterator.next()); // {value: li, done: false}
+      // console.log(iterator.next()); // {value: li, done: false}
+      // console.log(iterator.next()); // {value: undefined, done: true}
+    }
+    console.log('---------------------------------------')
+    {
+      const set = new Set([1, 2, 3]);
+      set[Symbol.iterator] = function () {
+        return {
+          next: function () {
+            if (this.done) {
+              this.done = false;
+              return {done: false, value: '321'};
+            } else {
+              return {done: true, value: undefined}
+            }
+          },
+          done: true
+        }
+      }
+      console.log([...set]);
+    }
+    console.log('---------------------------------------')
+    {
+      const arr = [1, 2, 3];
+      arr[Symbol.iterator] = function () {
+        return {
+          count: 3,
+          next () {
+            if (this.count === 6) {
+              return {value: undefined, done: true};
+            } else {
+              ++this.count;
+              return {value: this.count, done: false};
+            }
+          }
+        }
+      }
+      console.log(arr); // [1, 2, 3]
+      for (const ele of arr) {
+        console.log(ele); // 4, 5, 6
+      }
+    }
+  </script>
+</body>
+</html>

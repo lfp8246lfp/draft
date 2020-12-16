@@ -50,6 +50,17 @@
     </div>
     <h3>-------- 拖拽 --------</h3>
     <div class="btn" @mousedown="drag"></div>
+    <h3>-------- v-once --------</h3>
+    <span v-once>{{once}}</span>
+    <button @click="changeOnce">once++</button>
+    <button v-bind:disabled="isButtonDisabled">Button</button>
+    <h3>-------- keyup --------</h3>
+    <input @keyup.enter="input">
+    <h3>-------- mouse --------</h3>
+    <button @click.right.prevent="right">mouse</button>
+    <h3>-------- lazy --------</h3>
+    <input type="text" v-model.lazy="lazy" @change="lazyChange" @input="lazyInput">
+    <input type="text" v-model="notLazy" @change="notLazyChange" @input="notLazyInput">
   </div>
   <script src="./vue.js"></script>
   <script>
@@ -71,7 +82,11 @@
               show: true
             }
           ],
-          isDrag: false
+          isDrag: false,
+          once: 1,
+          isButtonDisabled: false,
+          lazy: '',
+          notLazy: '',
         }
       },
       mounted() {
@@ -117,7 +132,33 @@
             document.onmousemove = null
             document.onmouseup = null
           }
-        }
+        },
+        changeOnce () {
+          ++ this.once
+          console.log(this.once)
+        },
+        right () {
+          alert('right')
+        },
+        input (e) {
+          console.log(e, '$event')
+        },
+        lazyChange (e) {
+          console.log(e, 'lazyChange')
+          console.log(this.lazy, 'lazy')
+        },
+        notLazyChange (e) {
+          console.log(e, 'notLazyChange')
+          console.log(this.notLazy, 'notLazy')
+        },
+        lazyInput (e) {
+          console.log(e, 'lazyInput')
+          console.log(this.lazy, 'lazy')
+        },
+        notLazyInput (e) {
+          console.log(e, 'notLazyInput')
+          console.log(this.notLazy, 'notLazy')
+        },
       }
     })
   </script>

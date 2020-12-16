@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      let date7 = new Date(+new Date() - 7 * 24 * 60 * 60 * 1000)
+      console.log(date7);
+      // var time = date7.getFullYear()+"-"+(newDate.getMonth()+1)+"-"+newDate.getDate()
+
+      let date30 = new Date().setDate(new Date().getDate() - 30)
+      console.log(new Date(date30))
+
+
+      console.log(new Date().toLocaleString())
+
+      console.log(new Date().setMonth(new Date().getMonth() - 3))
+
+
+      function getDate() {
+        function dateFormat(date) {
+          return '' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+        }
+
+        let date1 = new Date(+new Date() - 7*24*60*60*1000)
+        let date2 = new Date()
+        return [dateFormat(date1), dateFormat(date2)]
+      }
+      console.log(getDate())
+
+
+      console.log(new Date(new Date().setDate(1)))
+    }
+
+    {
+      const date = new Date();
+      console.log(new Date(date.getTime() - 24 * 3600 * 1000));
+      console.log(date.setTime(date.getTime() - 24 * 3600 * 1000));
+      console.log(date.getTime() - 24 * 3600 * 1000);
+    }
+  </script>
+</body>
+</html>

@@ -21,7 +21,28 @@
 </head>
 <body>
   <div id="app">
-    <h3>----- el-menu横向 -----</h3>
+    <h1>----- 圆进度条 -----</h1>
+    <el-progress type="circle" :percentage="50" :width="100" :stroke-width="30" :show-text="false" stroke-linecap="flat"></el-progress>
+    <h1>----- 空行 -----</h1>
+    <el-input
+      type="textarea"
+      :rows="5"
+      placeholder="请输入内容"
+      v-model="textarea">
+    </el-input>
+    <el-button @click="splitLine">分隔空行</el-button>
+    <h1>----- 模糊查询 -----</h1>
+    <el-input v-model.trim="fuzzy" @input="fuzzySearch" @mousewheel.prevent></el-input>
+    <el-table
+      :data="searchData">
+      <el-table-column label="座次" prop="no"></el-table-column>
+      <el-table-column label="星宿" prop="star"></el-table-column>
+      <el-table-column label="绰号" prop="nickname"></el-table-column>
+      <el-table-column label="姓名" prop="name"></el-table-column>
+    </el-table>
+    <h1>----- el-input focus() -----</h1>
+    <el-input ref="ipt" style="width:200px" v-model.number="ipt" @mousewheel.prevent></el-input>
+    <h1>----- el-menu横向 -----</h1>
     <el-menu mode="horizontal" background-color="rgba(0,0,0,0.7)">
       <el-menu-item index="1">处理中心</el-menu-item>
       <el-submenu index="2">
@@ -40,7 +61,7 @@
 
     <br />
 
-    <h3>----- el-container -----</h3>
+    <h1>----- el-container -----</h1>
     <el-container>
       <div style="background:#a0a">left</div>
       <div style="background:#0aa">center</div>
@@ -60,7 +81,6 @@
             :label="scope.$index"
             @change="radioChange">
           </el-radio>
-          <!-- <input type="radio" name="radio" :value="scope.$index" @change="radioChange"> -->
         </template>
       </el-table-column>
       <el-table-column label="数据" prop="data">
@@ -68,7 +88,7 @@
     </el-table>
 
     <h3>----- el-button转圈圈 -----</h3>
-    <el-button type="primary" :loading="true" @click="loadClick">加载中</el-button>
+    <el-button type="primary" :loading="btnLoad" @click="loadClick">加载中</el-button>
 
 
     <h3>----- el-form重置 -----</h3>
@@ -102,9 +122,35 @@
         <el-button type="primary" @click="dialogShow = false">关闭</el-button>
       </div>
     </el-dialog>
+
+    <h3>----- el-checkbox-group -----</h3>
+    <el-checkbox-group v-model="list" @change="listChange">
+      <el-checkbox :label="1">选项一</el-checkbox>
+      <el-checkbox :label="2">选项二</el-checkbox>
+    </el-checkbox-group>
+    <h3>----- page -----</h3>
+    <el-table
+      :data="pageList"
+      border>
+      <el-table-column width="50" type="selection"></el-table-column>
+      <el-table-column label="数据" prop="data">
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      background
+      @size-change="sizeChange"
+      @current-change="currentChange"
+      :page-sizes="[10, 20, 40, 60, 200]"
+      layout="total, sizes, prev, pager, next, jumper"
+      :current-page="currentPage"
+      :total="total">
+    </el-pagination>
+    <el-button @click="turnPage(1)" type="primary">翻页+</el-button>
+    <el-button @click="turnPage(-1)">翻页-</el-button>
   </div>
   <script src="./vue.js"></script>
   <script src="./ele/index.js"></script>
+  <script src="./data.js"></script>
   <script>
     let vm = new Vue({
       el: '#app',
@@ -121,13 +167,78 @@
           data: '',
         },
         dialogShow: false,
+        list: [],
+        btnLoad: false,
+        params: {
+          size: 10,
+          current: 1
+        },
+        pageData: [
+          {data: 1},
+          {data: 2},
+          {data: 3},
+          {data: 4},
+          {data: 5},
+          {data: 6},
+          {data: 7},
+          {data: 8},
+          {data: 9},
+          {data: 10},
+          {data: 11},
+          {data: 12},
+          {data: 13},
+          {data: 14},
+          {data: 15},
+          {data: 16},
+          {data: 17},
+          {data: 18},
+          {data: 19},
+          {data: 20},
+          {data: 21},
+          {data: 22},
+          {data: 23},
+          {data: 24},
+          {data: 25},
+          {data: 26},
+          {data: 27},
+          {data: 28},
+        ],
+        pageList: [],
+        total: 0,
+        ipt: '',
+        fuzzy: '',
+        searchData: [],
+        textarea: '',
+        currentPage: 1
+      },
+      created () {
+        this.pageList = this.pageData.slice(0, this.params.size)
+        this.total = this.pageData.length
+      },
+      mounted () {
+        this.$refs.ipt.$el.children[0].focus()
       },
       methods: {
+        splitLine () {
+          // let arr = this.textarea.split('\n\n')
+          let arr = this.textarea.split(' ')
+          // for (let i = 0; i < arr.length; i++) {
+          //   if (arr[i] === ' ') {
+          //     arr[i] = ''
+          //   }
+          // }
+          arr = arr.join('').split('\n\n')
+          console.log(arr)
+        },
         radioChange (val) {
           console.log(val)
         },
         loadClick () {
-          console.log(123)
+          this.btnLoad = true
+          let timer = setTimeout(() => {
+            this.btnLoad = false
+            clearTimeout(timer)
+          }, 1000);
         },
         select (val) {
           this.selectArr = val
@@ -144,6 +255,30 @@
         },
         dialogClose () {
           this.$refs.formRef.resetFields()
+        },
+        listChange (val) {
+          console.log(val, 'list')
+        },
+        sizeChange (size) {
+          this.params.size = size
+          this.params.current = 1
+          this.pageList = this.pageData.slice(0, size)
+        },
+        currentChange (page) {
+          this.params.current = page
+          this.pageList = this.pageData.slice((page - 1) * this.params.size, page * this.params.size)
+        },
+        fuzzySearch (val) {
+          if (val) {
+            this.searchData = LiangShan.filter(ele => {
+              return ele.no.includes(val) || ele.star.includes(val) || ele.nickname.includes(val) || ele.name.includes(val)
+            })
+          } else {
+            this.searchData = []
+          }
+        },
+        turnPage (n) {
+          this.currentPage = this.currentPage + n
         },
       }
     })

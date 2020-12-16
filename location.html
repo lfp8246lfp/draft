@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let str = '?q=javascript&num=10';
+    function getParams (params) {
+      if (params.length <= 0) return {}
+      let arr = params.substr(1).split('&');
+      let obj = {};
+      arr.forEach(ele => {
+        let kv = ele.split('=')
+        obj[kv[0]] = kv[1]
+      });
+      return obj;
+    }
+    console.log(getParams(''));
+  </script>
+</body>
+</html>
