@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      margin: 50px;
+      box-sizing: border-box;
+      animation: roll 5s linear infinite;
+      transition: all 3s;
+    }
+    .round {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 500px;
+      height: 500px;
+      border: 10px solid #0aa;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+    .rect {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 500px;
+      height: 500px;
+      /* border: 10px solid #a00; */
+      box-sizing: border-box;
+    }
+    .bee {
+      position: absolute;
+      top: -5px;
+      left: 245px;
+      width: 10px;
+      height: 10px;
+      background-color: #aa0;
+      /* animation: fly 5s linear infinite; */
+      transition: all 3s;
+    }
+    @keyframes fly {
+      0% {}
+      12.5% {
+        left: 422px;
+        top: 68px;
+      }
+      25% {
+        left: 495px;
+        top: 245px;
+      }
+      37.5% {
+        left:422px;
+        top: 422px;
+      }
+      50% {
+        left: 245px;
+        top: 495px;
+      }
+      62.5% {
+        left: 68px;
+        top: 422px;
+      }
+      75% {
+        left: -5px;
+        top: 245px;
+      }
+      87.5% {
+        left: 68px;
+        top: 68px;
+      }
+      100% {}
+    }
+    @keyframes roll {
+      0% {}
+      50% {
+        transform: rotate(180deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="rect"></div>
+    <div class="round"></div>
+    <div class="bee"></div>
+  </div>
+</body>
+</html>

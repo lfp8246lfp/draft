@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+  </style>
 </head>
 <body>
-  <div id="node"></div>
+  <div id="node" data-name="html5"></div>
   <div class="parent">
     <!-- 123 -->
     <div class="boy"></div>
-    <div class="girl"></div>
+    <div class="girl">
+      <span class="baby"></span>
+    </div>
   </div>
 
   <ul>
@@ -18,18 +22,29 @@
     <li class="li" name="hhh"></li>
     <li class="li" name=""></li>
   </ul>
+
+  <div class="class1 class2"></div>
+
+  <input type="text" class="ipt1">
+  <input type="text" class="ipt2">
+  <input type="text" class="ipt3">
+  <input type="text" class="ipt4">
+
   <script>
     const node = document.querySelector('#node');
     console.log(node.nodeType); // 1
     console.log(node.nodeName); // div
     console.log(node.nodeValue); // null
-    console.log(node.ownerDocument, 'node.ownerDocument');
+    console.log(node.ownerDocument === document, 'node.ownerDocument');
     console.log(node.hasChildNodes(), 'node.hasChildNodes'); // false
+    console.log(node.dataset.name);
 
     const parent = document.querySelector('.parent');
     const children = Array.prototype.slice.call(parent.childNodes, 0);
+    const baby = document.querySelector('.baby');
     console.log(Array.isArray(children));
     console.log(children[1].nodeType);
+    console.log(parent.contains(baby));
 
     console.log(document.childNodes);
     console.log(document.childNodes.length);
@@ -42,13 +57,33 @@
     console.log(document.domain);
     console.log(document.referrer);
 
-
-    const list1 = document.getElementsByTagName('li');
-    const list2 = document.querySelectorAll('li');
+    const list1 = document.getElementsByTagName('ul')[0].getElementsByTagName('li');
+    const list2 = document.querySelectorAll('ul li');
     console.log(list1);
     console.log(list2);
 
-    document.write('123');
+    const ul = document.querySelector('ul');
+    console.log(ul);
+    console.log(ul.children);
+
+    const box = document.getElementsByClassName('class1 class2');
+    console.log(box);
+    console.log(box[0].classList);
+    console.log(Array.isArray(box[0].classList));
+
+    const ipts = document.querySelectorAll('input');
+    console.log(ipts);
+    for (let index = 0; index < ipts.length; index++) {
+      ipts[index].onfocus = function () {
+        console.log(document.activeElement);
+        console.log(document.hasFocus())
+      }
+    }
+
+    console.log(document.charset);
+    console.log(document.defaultCharset);
+
+
   </script>
 </body>
 </html>

@@ -84,6 +84,94 @@
       Person.say();
       console.log(Person.sex); // 静态属性似乎可以用
     }
+
+    {
+      class Father {
+        constructor (name) {
+          this.name = name;
+        }
+        sayName () {
+          console.log(this.name);
+        }
+      }
+      class Child extends Father {
+        constructor (name, age) {
+          super(name);
+          this.age = age;
+        }
+        sayAge () {
+          console.log(this.age);
+        }
+      }
+      const boy = new Child('bob', 18);
+      console.log(boy.name); // 'bob'
+      console.log(boy.age); // 18
+      boy.sayName(); // 'bob'
+      boy.sayAge(); // 18
+    }
+
+    {
+      class Father {
+        constructor (name) {
+          this.name = name;
+        }
+        sayName () {
+          console.log(this.name);
+        }
+        static job = 'driver';
+        static sing () {
+          console.log('lalala');
+        }
+      }
+      Father.prototype.money = 100;
+      class Child extends Father {
+        constructor (name, age) {
+          super(name);
+          this.age = age;
+        }
+        sayAge () {
+          console.log(this.age);
+        }
+        sayFatherName () {
+          super.sayName();
+        }
+        sayFatherMoney () {
+          console.log(super.money);
+        }
+        static sayFatherJob () {
+          console.log(super.job);
+        }
+        static sayStatic () {
+          super.sing();
+        }
+      }
+      const son = new Child('tom', 18);
+      son.sayFatherName(); // tom
+      son.sayFatherMoney(); // 100
+      Child.sayFatherJob(); // driver
+    }
+
+
+    {
+      class Father {
+        constructor () {}
+      }
+      class Child extends Father {}
+      Child.__proto__ === Father // true
+      Child.prototype.__proto__ === Father.prototype // true
+    }
+
+    {
+      class Child {}
+      Child.__proto__ === Function.prototype // true
+      Child.prototype.__proto__ === Object.prototype // true
+    }
+
+    {
+      class Child extends Object {}
+      Child.__proto__ === Object // true
+      Child.prototype.__proto__ === Object.prototype // true
+    }
   </script>
 </body>
 </html>

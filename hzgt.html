@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // let str = 'http://beetest.statesky.cn/powerh5/?mpid=wx2bb1651c3ccfc820#/personallogin'
+    let str = 'http://localhost:8082/?mpid=wx63478c60a33d8fa9&entry=/personal/&code=forceToAsTokenomTdO1VpnX4iYCtVL1wPAIkPQV_c&state=&entry=/personal/&entry=/personal/&entry=/personal/#/personal'
+    const getCurrentUrl = () => {
+      let href  = str
+      let index = href.indexOf('#')
+      return (index === -1) ? href: href.substring(0, index)
+    }
+    const getUrlParam = (key, url) => {
+        let reg   = new RegExp('[?|&]' + key + '=([^&]+)')
+        let match = url.match(reg)
+        return match && match[1]
+    }
+    let url = getCurrentUrl() + '&entry=/tab1/';
+    console.log(url, 'url');
+    let entry = getUrlParam('entry', url)
+    let appid = getUrlParam('mpid', url)
+    let code = getUrlParam('code', url)
+    console.log(entry, 'entry')
+    console.log(appid, 'appid')
+    console.log(code, 'code')
+  </script>
+</body>
+</html>

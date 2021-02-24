@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      const obj = {
+        a: 1
+      };
+      console.log(Reflect.has(obj, 'a'));
+      // console.log(Reflect.has('', 'a'));
+    }
+
+    {
+      const obj = {
+        a: 1
+      };
+      console.log(Reflect.deleteProperty(obj, 'a'));
+      // console.log(Reflect.has('', 'a'));
+    }
+
+    {
+      function Person (name) {
+        this.name = name;
+      }
+      const p = Reflect.construct(Person, ['oreo']);
+      console.log(p.constructor === Person); // true
+      console.log(p instanceof Person); // true
+      // Reflect.construct('', ['bob']);
+
+      console.log(Reflect.getPrototypeOf(p) === Person.prototype); // true
+      console.log(Object.getPrototypeOf(1) === Number.prototype); // true
+    }
+
+    {
+      const obj = {};
+      Reflect.setPrototypeOf(obj, Array.prototype);
+      console.log(obj instanceof Array); // true
+      // Reflect.setPrototypeOf('', null);
+    }
+
+  </script>
+</body>
+</html>

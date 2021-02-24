@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const person = {
+      name: 'bob',
+      age: 35,
+      gender: 'male'
+    }
+    const p = new Proxy(person, {
+      get (target, property) {
+        return 18;
+      },
+      set (target, property, value) {
+        if (property === 'age') {
+          if (!Number.isInteger(value)) {
+            throw new Error(`${value} is not a integer`);
+          }
+        } else if (property === 'gender') {
+          if (!['male', 'female'].includes(value)) {
+            throw new Error(`${value} is not a gender`);
+          }
+        }
+      }
+    })
+
+    console.log(p.name);
+    // try {
+    //   p.age = 5.5;
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
+    // try {
+    //   p.gender = 'unknown';
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
+  </script>
+</body>
+</html>
